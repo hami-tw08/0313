@@ -7,290 +7,173 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Pacifico&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --pink:    #FF5DAB;
-    --pink2:   #FF8CC8;
-    --purple:  #A855F7;
-    --purple2: #C084FC;
-    --coral:   #FF7E5F;
-    --bg:      #FFF0F8;
-    --text:    #3D0059;
-    --muted:   #9B5CA0;
-    --border:  #F0ABFC;
+    --pink:#FF5DAB; --pink2:#FF8CC8; --purple:#A855F7; --purple2:#C084FC;
+    --coral:#FF7E5F; --bg:#FFF0F8; --text:#3D0059; --muted:#9B5CA0; --border:#F0ABFC;
   }
-
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'Zen Maru Gothic', sans-serif;
-    background: var(--bg);
+    font-family:'Zen Maru Gothic',sans-serif;
+    background:var(--bg);
     background-image:
-      radial-gradient(circle at 10% 15%, rgba(255,93,171,0.13) 0%, transparent 50%),
-      radial-gradient(circle at 90% 80%, rgba(168,85,247,0.12) 0%, transparent 50%);
-    min-height: 100vh;
-    color: var(--text);
-    overflow-x: hidden;
+      radial-gradient(circle at 10% 15%,rgba(255,93,171,.13) 0%,transparent 50%),
+      radial-gradient(circle at 90% 80%,rgba(168,85,247,.12) 0%,transparent 50%);
+    min-height:100vh; color:var(--text); overflow-x:hidden;
   }
-
-  .blob {
-    position: fixed; border-radius: 50%; filter: blur(55px);
-    pointer-events: none; z-index: 0;
-    animation: blob-drift 10s ease-in-out infinite alternate;
-  }
-  .blob:nth-child(1){ width:300px;height:300px;background:rgba(255,93,171,0.14);top:-80px;left:-80px;animation-duration:9s; }
-  .blob:nth-child(2){ width:260px;height:260px;background:rgba(168,85,247,0.12);bottom:-60px;right:-60px;animation-duration:12s;animation-delay:-4s; }
-  .blob:nth-child(3){ width:180px;height:180px;background:rgba(255,209,102,0.11);top:38%;left:65%;animation-duration:14s;animation-delay:-6s; }
-  @keyframes blob-drift {
-    from { transform: translate(0,0) scale(1); }
-    to   { transform: translate(18px,28px) scale(1.06); }
-  }
-
-  .wrap {
-    position: relative; z-index: 1;
-    max-width: 600px; margin: 0 auto;
-    padding: 32px 20px 80px;
-  }
-
-  header { text-align:center; margin-bottom:32px; animation: fade-up .7s ease both; }
-
+  .blob { position:fixed; border-radius:50%; filter:blur(55px); pointer-events:none; z-index:0; animation:blob-drift 10s ease-in-out infinite alternate; }
+  .blob:nth-child(1){ width:300px;height:300px;background:rgba(255,93,171,.14);top:-80px;left:-80px;animation-duration:9s; }
+  .blob:nth-child(2){ width:260px;height:260px;background:rgba(168,85,247,.12);bottom:-60px;right:-60px;animation-duration:12s;animation-delay:-4s; }
+  .blob:nth-child(3){ width:180px;height:180px;background:rgba(255,209,102,.11);top:38%;left:65%;animation-duration:14s;animation-delay:-6s; }
+  @keyframes blob-drift { from{transform:translate(0,0) scale(1)} to{transform:translate(18px,28px) scale(1.06)} }
+  .wrap { position:relative;z-index:1;max-width:600px;margin:0 auto;padding:32px 20px 80px; }
+  header { text-align:center;margin-bottom:32px;animation:fade-up .7s ease both; }
   .logo-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: white; border: 2px solid var(--border);
-    border-radius: 40px; padding: 6px 18px;
-    font-size: 13px; font-weight: 700; color: var(--pink);
-    margin-bottom: 14px;
-    box-shadow: 0 2px 16px rgba(255,93,171,0.18);
-    animation: pop .5s cubic-bezier(.17,.67,.36,1.4) .2s both;
+    display:inline-flex;align-items:center;gap:8px;background:white;
+    border:2px solid var(--border);border-radius:40px;padding:6px 18px;
+    font-size:13px;font-weight:700;color:var(--pink);margin-bottom:14px;
+    box-shadow:0 2px 16px rgba(255,93,171,.18);animation:pop .5s cubic-bezier(.17,.67,.36,1.4) .2s both;
   }
-
   h1 {
-    font-family: 'Pacifico', cursive; font-size: 38px;
-    background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 60%, var(--coral) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    line-height: 1.2; margin-bottom: 8px;
+    font-family:'Pacifico',cursive;font-size:38px;
+    background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 60%,var(--coral) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.2;margin-bottom:8px;
   }
-  .header-sub { font-size:14px; color:var(--muted); font-weight:500; }
-
-  .setup-banner {
-    background: #FFFBEB; border: 2px solid #FDE68A; border-radius: 18px;
-    padding: 16px 20px; font-size: 13px; color: #92400E; line-height: 1.9;
-    margin-bottom: 20px; display: none;
-  }
-  .setup-banner strong { color: #B45309; }
-  .setup-banner code { background:#FEF3C7; border-radius:6px; padding:2px 6px; font-size:12px; color:#92400E; }
-  .setup-banner a { color:#B45309; font-weight:700; }
-
+  .header-sub { font-size:14px;color:var(--muted);font-weight:500; }
   .search-card {
-    background: white; border-radius: 24px; padding: 24px;
-    border: 2px solid var(--border);
-    box-shadow: 0 8px 32px rgba(255,93,171,0.11);
-    margin-bottom: 28px; animation: fade-up .7s ease .1s both;
+    background:white;border-radius:24px;padding:24px;border:2px solid var(--border);
+    box-shadow:0 8px 32px rgba(255,93,171,.11);margin-bottom:28px;animation:fade-up .7s ease .1s both;
   }
-  .search-label {
-    font-size:13px; font-weight:700; color:var(--pink);
-    margin-bottom:12px; display:flex; align-items:center; gap:6px;
-  }
-  .search-row { display:flex; gap:10px; margin-bottom:16px; }
-
+  .search-label { font-size:13px;font-weight:700;color:var(--pink);margin-bottom:12px;display:flex;align-items:center;gap:6px; }
+  .search-row { display:flex;gap:10px;margin-bottom:16px; }
   input[type="text"] {
-    flex:1; background:#FFF0F8; border:2px solid #FBCFE8; border-radius:16px;
-    padding:12px 18px; font-size:16px; font-weight:700;
-    color:var(--text); font-family:'Zen Maru Gothic',sans-serif; outline:none;
-    transition:border-color .2s, box-shadow .2s;
+    flex:1;background:#FFF0F8;border:2px solid #FBCFE8;border-radius:16px;
+    padding:12px 18px;font-size:16px;font-weight:700;color:var(--text);
+    font-family:'Zen Maru Gothic',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;
   }
-  input[type="text"]:focus { border-color:var(--pink); box-shadow:0 0 0 4px rgba(255,93,171,0.12); }
-  input[type="text"]::placeholder { color:#F9A8D4; font-weight:400; }
-
+  input[type="text"]:focus { border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,93,171,.12); }
+  input[type="text"]::placeholder { color:#F9A8D4;font-weight:400; }
   .btn-search {
-    background:linear-gradient(135deg,var(--pink),var(--purple));
-    color:white; border:none; border-radius:16px; padding:12px 22px;
-    font-size:15px; font-weight:700; font-family:'Zen Maru Gothic',sans-serif;
-    cursor:pointer; white-space:nowrap;
-    box-shadow:0 4px 16px rgba(168,85,247,0.35);
-    transition:transform .15s, box-shadow .15s;
+    background:linear-gradient(135deg,var(--pink),var(--purple));color:white;border:none;
+    border-radius:16px;padding:12px 22px;font-size:15px;font-weight:700;
+    font-family:'Zen Maru Gothic',sans-serif;cursor:pointer;white-space:nowrap;
+    box-shadow:0 4px 16px rgba(168,85,247,.35);transition:transform .15s,box-shadow .15s;
   }
-  .btn-search:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(168,85,247,0.45); }
+  .btn-search:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(168,85,247,.45); }
   .btn-search:active { transform:scale(.97); }
-
-  .quick-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .quick-tags { display:flex;flex-wrap:wrap;gap:8px; }
   .qtag {
-    background:#FDF2F8; border:1.5px solid #F9A8D4; border-radius:20px;
-    padding:5px 14px; font-size:13px; font-weight:700; color:#DB2777;
-    cursor:pointer; transition:background .15s, transform .1s;
+    background:#FDF2F8;border:1.5px solid #F9A8D4;border-radius:20px;
+    padding:5px 14px;font-size:13px;font-weight:700;color:#DB2777;
+    cursor:pointer;transition:background .15s,transform .1s;
   }
-  .qtag:hover { background:#FCE7F3; transform:scale(1.05); }
-
-  #loading { display:none; text-align:center; padding:40px 20px; animation:fade-up .4s ease both; }
+  .qtag:hover { background:#FCE7F3;transform:scale(1.05); }
+  #loading { display:none;text-align:center;padding:40px 20px;animation:fade-up .4s ease both; }
   .spinner {
-    width:52px; height:52px; border:4px solid #FBCFE8; border-top-color:var(--pink);
-    border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 16px;
+    width:52px;height:52px;border:4px solid #FBCFE8;border-top-color:var(--pink);
+    border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;
   }
-  .loading-text { font-size:15px; font-weight:700; color:var(--muted); }
-  @keyframes spin { to { transform:rotate(360deg); } }
-
+  .loading-text { font-size:15px;font-weight:700;color:var(--muted); }
+  @keyframes spin { to{transform:rotate(360deg)} }
   #error-box {
-    display:none; background:#FFF0F0; border:2px solid #FECACA; border-radius:18px;
-    padding:18px 22px; color:#DC2626; font-size:14px; font-weight:500;
-    margin-bottom:20px; line-height:1.7; animation:fade-up .4s ease both;
+    display:none;background:#FFF0F0;border:2px solid #FECACA;border-radius:18px;
+    padding:18px 22px;color:#DC2626;font-size:14px;font-weight:500;
+    margin-bottom:20px;line-height:1.7;animation:fade-up .4s ease both;
   }
-
-  #result { display:none; animation:fade-up .6s ease both; }
-
+  #result { display:none;animation:fade-up .6s ease both; }
   .result-card {
-    background:white; border-radius:28px; overflow:hidden;
-    border:2.5px solid var(--border);
-    box-shadow:0 10px 40px rgba(192,38,211,0.13); margin-bottom:20px;
+    background:white;border-radius:28px;overflow:hidden;border:2.5px solid var(--border);
+    box-shadow:0 10px 40px rgba(192,38,211,.13);margin-bottom:20px;
   }
-
   .img-hero {
-    position:relative;
-    background:linear-gradient(145deg,#FDF4FF,#FCE7F3,#EDE9FE);
-    padding:36px 20px 24px; display:flex; flex-direction:column; align-items:center;
+    position:relative;background:linear-gradient(145deg,#FDF4FF,#FCE7F3,#EDE9FE);
+    padding:36px 20px 24px;display:flex;flex-direction:column;align-items:center;
   }
-
   .web-badge {
-    position:absolute; top:14px; right:14px;
+    position:absolute;top:14px;right:14px;
     background:linear-gradient(135deg,var(--pink),var(--coral));
-    color:white; border-radius:20px; padding:4px 12px;
-    font-size:11px; font-weight:700; box-shadow:0 2px 8px rgba(255,93,171,0.4);
+    color:white;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;
+    box-shadow:0 2px 8px rgba(255,93,171,.4);
   }
-
   .main-img-wrap {
-    width:190px; height:190px; border-radius:50%; overflow:hidden;
-    border:5px solid white; box-shadow:0 8px 28px rgba(192,38,211,0.22);
-    margin-bottom:18px;
+    width:190px;height:190px;border-radius:50%;overflow:hidden;border:5px solid white;
+    box-shadow:0 8px 28px rgba(192,38,211,.22);margin-bottom:18px;
     background:linear-gradient(135deg,#FCA5D3,#C084FC);
-    display:flex; align-items:center; justify-content:center;
-    flex-shrink:0; transition:transform .3s; position:relative;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;transition:transform .3s;position:relative;
   }
   .main-img-wrap:hover { transform:scale(1.03); }
-
-  #main-img {
-    width:100%; height:100%; object-fit:cover;
-    display:none; position:absolute; inset:0;
-  }
-  .img-emoji { font-size:84px; line-height:1; position:relative; z-index:1; }
-
-  .flower-name-jp { font-size:26px; font-weight:900; color:#6B21A8; margin-bottom:4px; text-align:center; }
-  .flower-name-en { font-size:13px; color:var(--muted); font-weight:500; text-align:center; min-height:18px; }
-
-  .thumb-row { display:flex; gap:10px; margin-top:18px; justify-content:center; flex-wrap:wrap; }
+  #main-img { width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0; }
+  .img-emoji { font-size:84px;line-height:1;position:relative;z-index:1; }
+  .flower-name-jp { font-size:26px;font-weight:900;color:#6B21A8;margin-bottom:4px;text-align:center; }
+  .flower-name-en { font-size:13px;color:var(--muted);font-weight:500;text-align:center;min-height:18px; }
+  .thumb-row { display:flex;gap:10px;margin-top:18px;justify-content:center;flex-wrap:wrap; }
   .thumb {
-    width:68px; height:68px; border-radius:14px; overflow:hidden;
-    border:2.5px solid #F0ABFC; cursor:pointer;
-    background:linear-gradient(135deg,#FDF4FF,#FCE7F3);
-    flex-shrink:0; transition:border-color .2s, transform .15s, box-shadow .15s;
+    width:68px;height:68px;border-radius:14px;overflow:hidden;border:2.5px solid #F0ABFC;
+    cursor:pointer;background:linear-gradient(135deg,#FDF4FF,#FCE7F3);
+    flex-shrink:0;transition:border-color .2s,transform .15s,box-shadow .15s;
   }
-  .thumb:hover { transform:scale(1.08); box-shadow:0 4px 14px rgba(168,85,247,0.28); }
-  .thumb.active { border-color:var(--purple); box-shadow:0 0 0 3px rgba(168,85,247,0.22); }
-  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-
-  .photo-credit { font-size:11px; color:var(--muted); margin-top:10px; text-align:center; min-height:16px; }
-  .photo-credit a { color:var(--purple); text-decoration:none; }
+  .thumb:hover { transform:scale(1.08);box-shadow:0 4px 14px rgba(168,85,247,.28); }
+  .thumb.active { border-color:var(--purple);box-shadow:0 0 0 3px rgba(168,85,247,.22); }
+  .thumb img { width:100%;height:100%;object-fit:cover;display:block; }
+  .photo-credit { font-size:11px;color:var(--muted);margin-top:10px;text-align:center;min-height:16px; }
+  .photo-credit a { color:var(--purple);text-decoration:none; }
   .photo-credit a:hover { text-decoration:underline; }
-
   .result-body { padding:24px; }
-
-  .section-label {
-    display:flex; align-items:center; gap:7px;
-    font-size:13px; font-weight:700; color:var(--pink); margin-bottom:12px;
-  }
-  .label-dot {
-    width:8px; height:8px; border-radius:50%;
-    background:linear-gradient(135deg,var(--pink),var(--purple)); flex-shrink:0;
-  }
-
-  .kotoba-badges { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .section-label { display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--pink);margin-bottom:12px; }
+  .label-dot { width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));flex-shrink:0; }
+  .kotoba-badges { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px; }
   .kotoba-badge {
-    background:linear-gradient(135deg,var(--pink),var(--purple));
-    color:white; border-radius:20px; padding:6px 16px;
-    font-size:14px; font-weight:700;
-    box-shadow:0 2px 10px rgba(168,85,247,0.28);
-    animation:pop .4s cubic-bezier(.17,.67,.36,1.4) both;
+    background:linear-gradient(135deg,var(--pink),var(--purple));color:white;
+    border-radius:20px;padding:6px 16px;font-size:14px;font-weight:700;
+    box-shadow:0 2px 10px rgba(168,85,247,.28);animation:pop .4s cubic-bezier(.17,.67,.36,1.4) both;
   }
-
   .desc-box {
-    background:linear-gradient(135deg,#FAF5FF,#FDF2F8);
-    border-radius:16px; padding:16px 18px;
-    font-size:14px; line-height:1.9; color:#5B21B6;
-    border-left:4px solid var(--purple2); margin-bottom:18px;
+    background:linear-gradient(135deg,#FAF5FF,#FDF2F8);border-radius:16px;padding:16px 18px;
+    font-size:14px;line-height:1.9;color:#5B21B6;border-left:4px solid var(--purple2);margin-bottom:18px;
   }
-
-  .divider { border:none; border-top:2px dashed var(--border); margin:16px 0; }
-
-  .source-row { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
-  .source-dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--pink),var(--purple)); flex-shrink:0; }
-
-  .action-row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:24px; }
-
+  .divider { border:none;border-top:2px dashed var(--border);margin:16px 0; }
+  .source-row { display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted); }
+  .source-dot { width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));flex-shrink:0; }
+  .action-row { display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:24px; }
   .btn-action {
-    background:white; border:2px solid var(--border); border-radius:16px;
-    padding:11px 18px; font-size:14px; font-weight:700; color:var(--purple);
-    cursor:pointer; font-family:'Zen Maru Gothic',sans-serif;
-    display:flex; align-items:center; gap:6px;
-    transition:background .15s, transform .1s, box-shadow .15s;
-    box-shadow:0 2px 10px rgba(168,85,247,0.1);
+    background:white;border:2px solid var(--border);border-radius:16px;padding:11px 18px;
+    font-size:14px;font-weight:700;color:var(--purple);cursor:pointer;
+    font-family:'Zen Maru Gothic',sans-serif;display:flex;align-items:center;gap:6px;
+    transition:background .15s,transform .1s,box-shadow .15s;box-shadow:0 2px 10px rgba(168,85,247,.1);
   }
-  .btn-action:hover { background:#FAF5FF; transform:translateY(-2px); box-shadow:0 4px 14px rgba(168,85,247,0.18); }
+  .btn-action:hover { background:#FAF5FF;transform:translateY(-2px);box-shadow:0 4px 14px rgba(168,85,247,.18); }
   .btn-action:active { transform:scale(.97); }
-  .btn-action.fav {
-    background:linear-gradient(135deg,var(--pink),var(--purple));
-    color:white; border-color:transparent;
-    box-shadow:0 4px 16px rgba(168,85,247,0.35);
-  }
-  .btn-action.fav:hover { box-shadow:0 6px 20px rgba(168,85,247,0.45); }
-
-  #fav-section { display:none; margin-bottom:24px; animation:fade-up .5s ease both; }
-  .fav-title { font-size:15px; font-weight:700; color:var(--pink); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-  .fav-list { display:flex; flex-wrap:wrap; gap:8px; }
+  .btn-action.fav { background:linear-gradient(135deg,var(--pink),var(--purple));color:white;border-color:transparent;box-shadow:0 4px 16px rgba(168,85,247,.35); }
+  .btn-action.fav:hover { box-shadow:0 6px 20px rgba(168,85,247,.45); }
+  #fav-section { display:none;margin-bottom:24px;animation:fade-up .5s ease both; }
+  .fav-title { font-size:15px;font-weight:700;color:var(--pink);margin-bottom:12px;display:flex;align-items:center;gap:8px; }
+  .fav-list { display:flex;flex-wrap:wrap;gap:8px; }
   .fav-item {
-    background:white; border:2px solid var(--border); border-radius:16px;
-    padding:7px 14px; font-size:13px; font-weight:700; color:var(--purple);
-    cursor:pointer; transition:background .15s, transform .1s;
-    display:flex; align-items:center; gap:6px;
+    background:white;border:2px solid var(--border);border-radius:16px;padding:7px 14px;
+    font-size:13px;font-weight:700;color:var(--purple);cursor:pointer;
+    transition:background .15s,transform .1s;display:flex;align-items:center;gap:6px;
   }
-  .fav-item:hover { background:#FAF5FF; transform:scale(1.04); }
-  .fav-remove { color:#F9A8D4; font-size:14px; line-height:1; cursor:pointer; }
+  .fav-item:hover { background:#FAF5FF;transform:scale(1.04); }
+  .fav-remove { color:#F9A8D4;font-size:14px;line-height:1;cursor:pointer; }
   .fav-remove:hover { color:var(--pink); }
-
-  footer { text-align:center; font-size:12px; color:#C084FC; margin-top:20px; line-height:1.9; }
+  footer { text-align:center;font-size:12px;color:#C084FC;margin-top:20px;line-height:1.9; }
   footer a { color:var(--muted); }
-
   @keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes pop { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
-
-  @media(max-width:480px){
-    h1{font-size:30px;}
-    .main-img-wrap{width:150px;height:150px;}
-    .wrap{padding:24px 14px 60px;}
-  }
+  @media(max-width:480px){ h1{font-size:30px} .main-img-wrap{width:150px;height:150px} .wrap{padding:24px 14px 60px} }
 </style>
 </head>
 <body>
-
 <div class="blob"></div>
 <div class="blob"></div>
 <div class="blob"></div>
-
 <div class="wrap">
-
   <header>
     <div class="logo-pill">🌸 Hana Kotoba</div>
     <h1>花言葉しらべ</h1>
     <p class="header-sub">お花の名前を入れると花言葉と画像が出てくるよ 🌷</p>
   </header>
-
-  <div class="setup-banner" id="setup-banner">
-    ⚙️ <strong>Unsplash APIキーを設定してください：</strong><br>
-    ① <a href="https://unsplash.com/developers" target="_blank">unsplash.com/developers</a> でアプリを作成し <strong>Access Key</strong> を取得<br>
-    ② このHTMLファイルの先頭スクリプト内の<br>
-    &nbsp;&nbsp;&nbsp;<code>const UNSPLASH_ACCESS_KEY = 'A2sf8S2ka2VgmMEa-0NJKTv8qRxa2r6GAXkL_di-MKQ';</code><br>
-    &nbsp;&nbsp;&nbsp;の部分を書き換えてください<br>
-    ※ キー未設定でも花言葉は表示されます（画像のみ絵文字で代替）<br>
-    ✅ 花言葉データは内蔵DBから取得（オフライン動作・API不要）
-  </div>
-
   <div class="search-card">
     <div class="search-label"><span>✦</span><span>お花の名前を入力してね</span></div>
     <div class="search-row">
@@ -298,28 +181,22 @@
       <button class="btn-search" onclick="doSearch()">しらべる 🌸</button>
     </div>
     <div class="quick-tags">
+      <span class="qtag" onclick="quickSearch('バラ')">🌹 バラ</span>
       <span class="qtag" onclick="quickSearch('桜')">🌸 桜</span>
       <span class="qtag" onclick="quickSearch('チューリップ')">🌷 チューリップ</span>
       <span class="qtag" onclick="quickSearch('ひまわり')">🌻 ひまわり</span>
-      <span class="qtag" onclick="quickSearch('バラ')">🌹 バラ</span>
-      <span class="qtag" onclick="quickSearch('スミレ')">💜 スミレ</span>
-      <span class="qtag" onclick="quickSearch('コスモス')">🌺 コスモス</span>
-      <span class="qtag" onclick="quickSearch('ラベンダー')">💜 ラベンダー</span>
+      <span class="qtag" onclick="quickSearch('カーネーション')">🌺 カーネーション</span>
       <span class="qtag" onclick="quickSearch('あじさい')">💠 あじさい</span>
+      <span class="qtag" onclick="quickSearch('ラベンダー')">💜 ラベンダー</span>
+      <span class="qtag" onclick="quickSearch('コスモス')">🌺 コスモス</span>
     </div>
   </div>
-
-  <div id="loading">
-    <div class="spinner"></div>
-    <p class="loading-text" id="loading-text">お花の情報を集めています… 🌿</p>
-  </div>
-
+  <div id="loading"><div class="spinner"></div><p class="loading-text">お花の情報を集めています… 🌿</p></div>
   <div id="error-box"></div>
-
   <div id="result">
     <div class="result-card">
       <div class="img-hero">
-        <div class="web-badge">花言葉取得済み ✦</div>
+        <div class="web-badge">花言葉 ✦</div>
         <div class="main-img-wrap">
           <img id="main-img" alt="花の画像" />
           <span class="img-emoji" id="img-emoji">🌸</span>
@@ -334,312 +211,516 @@
         <div class="kotoba-badges" id="kotoba-badges"></div>
         <div class="desc-box" id="desc-box">—</div>
         <hr class="divider">
-        <div class="source-row">
-          <div class="source-dot"></div>
-          <span id="source-text">出典：hanakotoba.net</span>
-        </div>
+        <div class="source-row"><div class="source-dot"></div><span id="source-text">出典：内蔵花言葉データベース</span></div>
       </div>
     </div>
-
     <div class="action-row">
-      <button class="btn-action fav" onclick="toggleFav()">
-        <span id="fav-icon">♡</span>
-        <span id="fav-label">お気に入りに追加</span>
-      </button>
+      <button class="btn-action fav" onclick="toggleFav()"><span id="fav-icon">♡</span><span id="fav-label">お気に入りに追加</span></button>
       <button class="btn-action" onclick="shareResult()">↗ 共有する</button>
       <button class="btn-action" onclick="clearResult()">✦ 別の花を見る</button>
     </div>
   </div>
-
   <div id="fav-section">
     <div class="fav-title">♡ お気に入りの花</div>
     <div class="fav-list" id="fav-list"></div>
   </div>
-
   <footer>
-    花言葉：内蔵データベース（約100種）より表示<br>
-    画像：<a href="https://unsplash.com" target="_blank">Unsplash API</a>
+    花言葉：内蔵データベース（200種）より表示 ／
+    画像：<a href="https://unsplash.com" target="_blank">Unsplash</a>
   </footer>
 </div>
 
 <script>
 // =============================================
-//  ⚙️  Unsplash Access Key をここに入力
-//      → https://unsplash.com/developers
+//  ⚙️  Unsplash Access Key
 // =============================================
-const UNSPLASH_ACCESS_KEY = 'YOUR_UNSPLASH_ACCESS_KEY_HERE';
-// =============================================
+const UNSPLASH_ACCESS_KEY = 'A2sf8S2ka2VgmMEa-0NJKTv8qRxa2r6GAXkL_di-MKQ';
 
 // =============================================
-//  🌸 花言葉データベース（約100種）
+//  🌸 花言葉データベース（200種）
+//     花屋でよく売られる人気の花を中心に収録
 // =============================================
 const FLOWER_DB = {
-  // ── バラ科 ──
-  'バラ':        { en:'Rose',            keywords:['愛','美','情熱','あなたを愛しています'],         desc:'赤いバラは深い愛情と情熱の象徴。ピンクは感謝・しとやかさ、白は純潔・尊敬、黄色は友情・嫉妬を表します。古くから「花の女王」として世界中で愛されてきました。' },
-  'サクラ':      { en:'Cherry Blossom',  keywords:['精神の美','優れた美人','純潔','淡い恋'],        desc:'日本を代表する花。儚く散る姿から「物事の美しさ・潔さ」を象徴します。また「優れた美人」「精神の美しさ」といった花言葉も持ちます。' },
-  '桜':          { en:'Cherry Blossom',  keywords:['精神の美','優れた美人','純潔','淡い恋'],        desc:'日本を代表する花。儚く散る姿から「物事の美しさ・潔さ」を象徴します。また「優れた美人」「精神の美しさ」といった花言葉も持ちます。' },
-  'ウメ':        { en:'Japanese Plum',   keywords:['高潔','忍耐','忠実','上品'],                    desc:'寒い冬を耐え、春一番に咲く梅は「高潔・忍耐・忠実」の象徴。学問の神・菅原道真が愛した花としても知られています。' },
-  'イチゴ':      { en:'Strawberry',      keywords:['尊重と愛情','先見の明','誘惑'],                 desc:'赤く甘い果実の花。「尊重と愛情」「誘惑」という花言葉を持ちます。' },
+  // ━━━ バラ ━━━
+  'バラ':          {en:'rose',            e:'🌹', kw:['愛','美','情熱','あなたを愛しています'],              d:'赤いバラは深い愛と情熱の象徴。ピンクは感謝・しとやかさ、白は純潔・尊敬、黄色は友情を表します。古くから「花の女王」として世界中で愛されてきました。'},
+  '赤いバラ':      {en:'red rose',        e:'🌹', kw:['愛','情熱','あなたを愛しています','熱烈な恋'],       d:'深い愛と情熱の象徴。プロポーズや記念日など、愛を伝えるシーンで最も選ばれる花です。'},
+  'ピンクのバラ':  {en:'pink rose',       e:'🌸', kw:['感謝','しとやかさ','上品な愛','愛の誓い'],          d:'感謝と上品な愛を表します。母の日や誕生日のプレゼントにとても人気があります。'},
+  '白いバラ':      {en:'white rose',      e:'🤍', kw:['純潔','尊敬','深い敬意','私はあなたにふさわしい'],   d:'純潔と尊敬の象徴。結婚式のウエディングブーケとしても定番の花です。'},
+  '黄色いバラ':    {en:'yellow rose',     e:'💛', kw:['友情','愛の告白','嫉妬','友達として好き'],           d:'明るく友情を表す花。ただし「嫉妬」という意味も含むため、贈り方に注意が必要です。'},
+  'オレンジのバラ':{en:'orange rose',     e:'🧡', kw:['絆','無邪気','照れくさい','爽やかな恋'],            d:'情熱と友情の中間を表す温かみのある色。「絆・無邪気」という花言葉を持ちます。'},
+  '紫のバラ':      {en:'purple rose',     e:'💜', kw:['気品','尊敬','上品'],                               d:'珍しい色のバラ。「気品・尊敬・上品」という高貴な花言葉を持ちます。'},
 
-  // ── キク科 ──
-  'ひまわり':    { en:'Sunflower',       keywords:['あなただけを見つめる','憧れ','情熱','光輝'],    desc:'太陽に向かって咲く大輪の花。「あなただけを見つめる」という一途な愛の象徴です。また「憧れ・情熱・光輝」など、明るくポジティブな意味を持ちます。' },
-  'キク':        { en:'Chrysanthemum',   keywords:['高貴','高潔','長寿','真実の愛'],               desc:'日本の国花のひとつ。「高貴・高潔・長寿」など格調高い意味を持ちます。白菊は「誠実」、黄菊は「長寿」を象徴します。' },
-  'マーガレット':{ en:'Marguerite',      keywords:['真実の愛','誠実','恋占い'],                    desc:'「愛している・愛していない」と花びらを一枚ずつ取りながら恋占いをする花。「真実の愛・誠実」という花言葉を持ちます。' },
-  'デイジー':    { en:'Daisy',           keywords:['純潔','平和','希望','幸福'],                   desc:'小さく可憐な白い花びらと黄色い中心が特徴。「純潔・平和・希望」などの花言葉を持つ、春を告げる花です。' },
-  'コスモス':    { en:'Cosmos',          keywords:['乙女の純潔','調和','謙虚'],                    desc:'秋風に揺れる繊細な花。「乙女の純潔」「調和・謙虚」という清らかな花言葉を持ちます。ピンクは「純潔」、白は「優美」を表します。' },
-  'タンポポ':    { en:'Dandelion',       keywords:['愛の神託','真心の愛','別離','幸福'],           desc:'どこにでも咲く身近な花。「愛の神託」「真心の愛」というロマンティックな花言葉を持つほか、「別離」という意味もあります。' },
-  'ガーベラ':    { en:'Gerbera',         keywords:['希望','前進','常に前向き','神秘'],              desc:'明るくカラフルな花。色によって意味が変わり、赤は「チャレンジ」、ピンクは「感謝」、白は「希望」、黄色は「究極の愛」を表します。' },
-  'カモミール':  { en:'Chamomile',       keywords:['逆境に耐える','仲直り','愛らしさ'],            desc:'アップルに似た甘い香りのハーブ花。「逆境に耐える・仲直り」という優しい花言葉を持ちます。' },
+  // ━━━ 桜 ━━━
+  '桜':            {en:'cherry blossom', e:'🌸', kw:['精神の美','優れた美人','純潔','淡い恋'],             d:'日本を代表する花。儚く散る姿から「精神の美しさ・潔さ」を象徴します。'},
+  'サクラ':        {en:'cherry blossom', e:'🌸', kw:['精神の美','優れた美人','純潔','淡い恋'],             d:'日本を代表する花。儚く散る姿から「精神の美しさ・潔さ」を象徴します。'},
+  'ソメイヨシノ':  {en:'cherry blossom', e:'🌸', kw:['精神の美','優れた美人','純潔'],                      d:'日本で最もよく見られる桜の品種。淡いピンクの花が春を告げます。'},
+  'ヤマザクラ':    {en:'mountain cherry',e:'🌸', kw:['あなたにほほえむ','純潔'],                           d:'山に自生する日本固有の桜。古くから日本人に愛されてきた野生の桜です。'},
 
-  // ── ユリ科・アヤメ科 ──
-  'チューリップ':{ en:'Tulip',           keywords:['思いやり','博愛','正直な愛'],                  desc:'春を代表する花。赤は「愛の宣言」、白は「失われた愛」「新しい愛」、ピンクは「誠実な愛」、黄色は「望みのない愛」という意味があります。' },
-  'ユリ':        { en:'Lily',            keywords:['純粋','無垢','威厳','純潔'],                   desc:'凛とした美しい花。「純粋・無垢・威厳」という上品な花言葉を持ちます。白ユリは特に「純潔」の象徴とされ、結婚式でも人気です。' },
-  'スズラン':    { en:'Lily of Valley',  keywords:['幸福が訪れる','純粋','謙虚','再び幸せに'],     desc:'小さく可愛い鈴型の白い花。「幸福が訪れる」という縁起の良い花言葉で知られています。フランスでは5月1日に贈る風習があります。' },
-  'ヒヤシンス':  { en:'Hyacinth',        keywords:['スポーツ','ゲーム','悲しみを超えた愛'],       desc:'甘い香りが特徴。色ごとに意味が異なり、青は「変わらぬ愛」、紫は「悲しみ」、白は「心静かな愛」、ピンクは「しとやかなかわいらしさ」を表します。' },
-  'スミレ':      { en:'Violet',          keywords:['誠実','謙虚','小さな幸福','愛'],              desc:'小さくて可憐な花。「誠実・謙虚・小さな幸福」という奥ゆかしい花言葉を持ちます。紫色は「謙虚」、白は「純潔な愛」を意味します。' },
-  'アヤメ':      { en:'Iris',            keywords:['良い便り','優雅','信念','勇気'],               desc:'凛々しく美しい花。「良い便り・優雅・信念・勇気」という凛とした花言葉を持ちます。' },
+  // ━━━ チューリップ ━━━
+  'チューリップ':  {en:'tulip',          e:'🌷', kw:['思いやり','博愛','正直な愛'],                        d:'春を代表する花。赤は「愛の宣言」、白は「新しい愛」、ピンクは「誠実な愛」、黄色は「望みのない愛」という意味があります。'},
+  '赤いチューリップ':{en:'red tulip',    e:'🌷', kw:['愛の宣言','愛してます','信じてください'],            d:'チューリップの中でも特に情熱的な赤。「愛の宣言」という強い花言葉を持ちます。'},
+  '白いチューリップ':{en:'white tulip',  e:'🤍', kw:['失われた愛','新しい愛','純粋'],                      d:'清楚な白いチューリップ。「新しい愛の始まり」という花言葉を持ちます。'},
+  '黄色いチューリップ':{en:'yellow tulip',e:'🌼',kw:['望みのない愛','正直','名声'],                        d:'明るい黄色のチューリップ。「正直」という誠実な花言葉を持ちます。'},
+  'ピンクのチューリップ':{en:'pink tulip',e:'🌷',kw:['誠実な愛','愛の芽生え','幸運'],                      d:'柔らかなピンクのチューリップ。「誠実な愛・愛の芽生え」という甘い花言葉を持ちます。'},
+  '紫のチューリップ':{en:'purple tulip', e:'💜', kw:['永遠の愛','不滅の愛'],                              d:'希少な紫のチューリップ。「永遠の愛・不滅の愛」という深い花言葉を持ちます。'},
 
-  // ── ナデシコ科 ──
-  'カーネーション':{ en:'Carnation',     keywords:['母への愛','純粋な愛','感謝','無垢で深い愛'],  desc:'母の日の定番。赤は「母への愛・感謝」、ピンクは「感謝・上品」、白は「純粋な愛・尊敬」、黄色は「軽蔑・嫉妬」という意味があります。' },
+  // ━━━ カーネーション ━━━
+  'カーネーション':{en:'carnation',      e:'🌺', kw:['母への愛','純粋な愛','感謝','無垢で深い愛'],         d:'母の日の定番花。赤は「母への愛・感謝」、ピンクは「感謝・上品」、白は「純粋な愛・尊敬」、黄色は「軽蔑・嫉妬」を表します。'},
+  '赤いカーネーション':{en:'red carnation',e:'🌺',kw:['母への愛','熱烈な愛','賞賛'],                       d:'「母への愛」を象徴する赤いカーネーション。母の日に最も贈られる花です。'},
+  'ピンクのカーネーション':{en:'pink carnation',e:'🌸',kw:['感謝','上品','美しい仕草'],                    d:'「感謝・上品」という花言葉から、母の日や感謝を伝えるシーンで人気です。'},
+  '白いカーネーション':{en:'white carnation',e:'🤍',kw:['純粋な愛','尊敬','亡き母を偲ぶ'],                d:'白は純潔と尊敬の象徴。亡くなった母を偲ぶ意味でも用いられます。'},
 
-  // ── アジサイ科 ──
-  'あじさい':    { en:'Hydrangea',       keywords:['移り気','辛抱強い愛情','家族団欒','和気あいあい'], desc:'梅雨を彩る花。「移り気」という花言葉は、色が変化する性質から。青は「辛抱強い愛情」、白は「寛容」、ピンクは「元気な女性」を表します。' },
-  'アジサイ':    { en:'Hydrangea',       keywords:['移り気','辛抱強い愛情','家族団欒','和気あいあい'], desc:'梅雨を彩る花。「移り気」という花言葉は、色が変化する性質から。青は「辛抱強い愛情」、白は「寛容」、ピンクは「元気な女性」を表します。' },
+  // ━━━ ユリ ━━━
+  'ユリ':          {en:'lily',           e:'🌷', kw:['純粋','無垢','威厳','純潔'],                         d:'凛とした美しい花。「純粋・無垢・威厳」という上品な花言葉を持ちます。白ユリは特に「純潔」の象徴。'},
+  '百合':          {en:'lily',           e:'🌷', kw:['純粋','無垢','威厳','純潔'],                         d:'凛とした美しい花。「純粋・無垢・威厳」という上品な花言葉を持ちます。'},
+  '白いユリ':      {en:'white lily',     e:'🤍', kw:['純潔','威厳','無垢'],                               d:'ウエディングの定番。「純潔・威厳」という花言葉から結婚式で愛用されます。'},
+  'カサブランカ':  {en:'casablanca lily',e:'🌷', kw:['威厳','高貴','祝福'],                               d:'ユリの女王とも呼ばれる大輪の白いユリ。「威厳・高貴・祝福」という花言葉を持ちます。'},
+  'オリエンタルリリー':{en:'oriental lily',e:'🌷',kw:['壮大な愛','純潔','高貴'],                           d:'豊かな香りと大輪の花が特徴。「壮大な愛・高貴」という花言葉を持ちます。'},
+  'スカシユリ':    {en:'asiatic lily',   e:'🌷', kw:['注目を集める','陽気','前向き'],                     d:'上向きに咲く華やかなユリ。「注目を集める・陽気」という花言葉を持ちます。'},
+  'テッポウユリ':  {en:'easter lily',    e:'🌷', kw:['純粋','無垢','甘美'],                               d:'ラッパ型の白い花が清楚なユリ。「純粋・無垢」という花言葉を持ちます。'},
 
-  // ── シソ科 ──
-  'ラベンダー':  { en:'Lavender',        keywords:['沈黙','清潔','優美','あなたを待っています'],   desc:'爽やかな香りが人気のハーブ。「沈黙・清潔・優美」という上品な花言葉を持ちます。「あなたを待っています」という一途な思いも表します。' },
+  // ━━━ ひまわり ━━━
+  'ひまわり':      {en:'sunflower',      e:'🌻', kw:['あなただけを見つめる','憧れ','情熱','光輝'],         d:'太陽に向かって咲く大輪の花。「あなただけを見つめる」という一途な愛の象徴。「憧れ・情熱・光輝」など明るい意味も持ちます。'},
+  '向日葵':        {en:'sunflower',      e:'🌻', kw:['あなただけを見つめる','憧れ','情熱'],               d:'太陽に向かって咲く大輪の花。一途な愛と情熱を象徴します。'},
 
-  // ── キンポウゲ科 ──
-  'ラナンキュラス':{ en:'Ranunculus',    keywords:['晴れやかな魅力','光輝く魅力','名声'],         desc:'幾重にも重なる花びらが美しい花。「晴れやかな魅力・光輝く魅力」という華やかな花言葉を持ちます。' },
-  'クレマチス':  { en:'Clematis',        keywords:['精神の美しさ','旅人の喜び','策略'],            desc:'つる性の花。「精神の美しさ」という高尚な花言葉を持ちます。' },
+  // ━━━ あじさい ━━━
+  'あじさい':      {en:'hydrangea',      e:'💠', kw:['移り気','辛抱強い愛情','家族団欒','和気あいあい'],   d:'梅雨を彩る花。色が変化する性質から「移り気」という花言葉も。青は「辛抱強い愛情」、白は「寛容」、ピンクは「元気な女性」を表します。'},
+  'アジサイ':      {en:'hydrangea',      e:'💠', kw:['移り気','辛抱強い愛情','家族団欒'],                 d:'梅雨を彩る花。「辛抱強い愛情・家族団欒」という温かな花言葉を持ちます。'},
+  '紫陽花':        {en:'hydrangea',      e:'💠', kw:['移り気','辛抱強い愛情','和気あいあい'],             d:'梅雨の季節を彩る日本の花。「辛抱強い愛情」という深い花言葉を持ちます。'},
 
-  // ── バラ科（その他）──
-  'フリージア':  { en:'Freesia',         keywords:['親愛の情','無邪気','友情','あなたを思う'],     desc:'春の甘い香りが特徴。「親愛の情・無邪気・友情」という花言葉を持ちます。友人や親しい人への贈り物にも最適です。' },
-  'スイートピー':{ en:'Sweet Pea',       keywords:['門出','優しい思い出','別離','ほのかな喜び'],  desc:'蝶のような可愛い花。「門出・優しい思い出」という花言葉から、卒業や旅立ちのシーンでよく贈られます。' },
+  // ━━━ ラベンダー ━━━
+  'ラベンダー':    {en:'lavender',       e:'💜', kw:['沈黙','清潔','優美','あなたを待っています'],         d:'爽やかな香りが人気のハーブ。「沈黙・清潔・優美」という上品な花言葉と、「あなたを待っています」という一途な思いも表します。'},
 
-  // ── ムラサキ科 ──
-  'ネモフィラ':  { en:'Nemophila',       keywords:['可憐','どこでも成功','あなたを許す'],          desc:'小さな青い花が一面に広がる春の花。「可憐・あなたを許す」という優しい花言葉を持ちます。' },
-  'ワスレナグサ': { en:'Forget-me-not',  keywords:['私を忘れないで','真実の愛','友情'],            desc:'小さな青い花。「私を忘れないで」という花言葉が有名で、変わらぬ愛・友情の象徴です。' },
+  // ━━━ コスモス ━━━
+  'コスモス':      {en:'cosmos',         e:'🌸', kw:['乙女の純潔','調和','謙虚','乙女の愛情'],            d:'秋風に揺れる繊細な花。「乙女の純潔」「調和・謙虚」という清らかな花言葉を持ちます。ピンクは「純潔」、白は「優美」を表します。'},
 
-  // ── ヒルガオ科 ──
-  'アサガオ':    { en:'Morning Glory',   keywords:['愛情の絆','はかない恋','固い絆'],             desc:'夏の朝に咲く花。「愛情の絆・固い絆」という花言葉を持ち、つるが巻き付く様子から「縁・絆」の象徴とされます。' },
+  // ━━━ スズラン ━━━
+  'スズラン':      {en:'lily of the valley',e:'🌿',kw:['幸福が訪れる','純粋','謙虚','再び幸せに'],        d:'小さく可愛い鈴型の白い花。「幸福が訪れる」という縁起の良い花言葉で知られます。フランスでは5月1日に贈る風習があります。'},
+  '鈴蘭':          {en:'lily of the valley',e:'🌿',kw:['幸福が訪れる','純粋','謙虚'],                     d:'小さな白い鈴型の花。「幸福が訪れる」という縁起の良い花言葉で愛されます。'},
 
-  // ── ナス科 ──
-  'ペチュニア':  { en:'Petunia',         keywords:['あなたと一緒にいると心が和む','変化に富む'],  desc:'カラフルで花持ちのよい花。「あなたと一緒にいると心が和む」という温かな花言葉を持ちます。' },
+  // ━━━ フリージア ━━━
+  'フリージア':    {en:'freesia',        e:'🌼', kw:['親愛の情','無邪気','友情','あなたを思う'],           d:'春の甘い香りが特徴。「親愛の情・無邪気・友情」という花言葉を持ちます。友人への贈り物にも最適です。'},
 
-  // ── スイカズラ科 ──
-  'ニオイスミレ':{ en:'Sweet Violet',    keywords:['誠実','謙虚','愛'],                           desc:'香り高い小さな花。「誠実・謙虚」という控えめで清らかな花言葉を持ちます。' },
+  // ━━━ チューリップ以外の球根花 ━━━
+  'ヒヤシンス':    {en:'hyacinth',       e:'💜', kw:['スポーツ','ゲーム','悲しみを超えた愛','しとやか'],  d:'甘い香りが特徴。青は「変わらぬ愛」、紫は「悲しみ」、白は「心静かな愛」、ピンクは「しとやか」を表します。'},
+  'ムスカリ':      {en:'muscari',        e:'💙', kw:['失意','寛大な愛','明るい未来'],                     d:'小さな青紫の花が密集して咲く球根植物。「明るい未来・寛大な愛」という花言葉を持ちます。'},
+  'アネモネ':      {en:'anemone',        e:'🌸', kw:['はかない恋','恋の苦しみ','君を愛す','期待'],        d:'鮮やかな色の花びらが特徴。「はかない恋・君を愛す」というロマンティックな花言葉を持ちます。'},
+  'ラナンキュラス':{en:'ranunculus',     e:'🌸', kw:['晴れやかな魅力','光輝く魅力','名声'],              d:'幾重にも重なる花びらが美しい花。「晴れやかな魅力・光輝く魅力」という華やかな花言葉を持ちます。'},
+  'アリウム':      {en:'allium',         e:'💜', kw:['正しい主張','深い思いやり','不思議な魅力'],         d:'球状に咲く独特の形の花。「正しい主張・不思議な魅力」という個性的な花言葉を持ちます。'},
+  'クロッカス':    {en:'crocus',         e:'💜', kw:['青春の喜び','私を信じて','喜び'],                   d:'春一番に咲く小さな花。「青春の喜び・私を信じて」という瑞々しい花言葉を持ちます。'},
+  'ダリア':        {en:'dahlia',         e:'🌺', kw:['華麗','優雅','移り気','感謝'],                      d:'豪華で大輪の花。「華麗・優雅」という花言葉のほか、色によって意味が異なります。赤は「情熱」、白は「感謝」を表します。'},
+  'グラジオラス': {en:'gladiolus',       e:'🌺', kw:['用心','勝利','力強さ','真剣な愛'],                 d:'剣のような葉と花穂が特徴。「用心・勝利・力強さ」という花言葉があり、成功祝いにも人気です。'},
+  'カラー':        {en:'calla lily',     e:'🤍', kw:['清純','乙女のしとやかさ','素晴らしい美'],          d:'シンプルで洗練されたフォルムが特徴。「清純・乙女のしとやかさ」という上品な花言葉を持ちます。'},
 
-  // ── マメ科 ──
-  'クローバー':  { en:'Clover',          keywords:['約束','幸運','復讐','私のものになって'],       desc:'4枚葉のクローバーは「幸運」の象徴として有名。白クローバーの花言葉は「約束・幸運」です。' },
-  'フジ':        { en:'Wisteria',        keywords:['歓迎','恋に迷う','決して離れない'],           desc:'薄紫の房状の花が美しい植物。「歓迎・恋に迷う・決して離れない」というロマンティックな花言葉を持ちます。' },
+  // ━━━ ガーベラ ━━━
+  'ガーベラ':      {en:'gerbera',        e:'🌼', kw:['希望','前進','常に前向き','神秘'],                  d:'明るくカラフルな花。赤は「チャレンジ」、ピンクは「感謝」、白は「希望」、黄色は「究極の愛」、オレンジは「冒険心」を表します。'},
 
-  // ── バショウ科 ──
-  'ストレリチア':{ en:'Bird of Paradise',keywords:['寛大','気取った恋','輝かしい未来'],           desc:'鮮やかなオレンジと青の花。「輝かしい未来・寛大」という前向きな花言葉から、誕生日や就職祝いに人気です。' },
+  // ━━━ スミレ ━━━
+  'スミレ':        {en:'violet',         e:'💜', kw:['誠実','謙虚','小さな幸福','誠実な愛'],             d:'小さく可憐な花。「誠実・謙虚・小さな幸福」という奥ゆかしい花言葉を持ちます。紫色は「謙虚」、白は「純潔な愛」を意味します。'},
+  '菫':            {en:'violet',         e:'💜', kw:['誠実','謙虚','小さな幸福'],                        d:'小さく可憐な花。「誠実・謙虚・小さな幸福」という奥ゆかしい花言葉を持ちます。'},
+  'パンジー':      {en:'pansy',          e:'💜', kw:['物思い','私を思って','思慮深い'],                   d:'三色の花びらが特徴。「物思い・私を思って」という花言葉はフランス語の「考える（penser）」に由来します。'},
 
-  // ── ハス科 ──
-  'ハス':        { en:'Lotus',           keywords:['清らかな心','神聖','離れゆく愛','雄弁'],      desc:'泥の中から清らかな花を咲かせることから「清らかな心・神聖」の象徴。仏教でも悟りを象徴する花として重視されます。' },
-  '蓮':          { en:'Lotus',           keywords:['清らかな心','神聖','離れゆく愛','雄弁'],      desc:'泥の中から清らかな花を咲かせることから「清らかな心・神聖」の象徴。仏教でも悟りを象徴する花として重視されます。' },
+  // ━━━ マーガレット ━━━
+  'マーガレット':  {en:'marguerite',     e:'🌼', kw:['真実の愛','誠実','恋占い'],                        d:'「愛している・愛していない」と花びらで恋占いをする花。「真実の愛・誠実」という花言葉を持ちます。'},
 
-  // ── ツバキ科 ──
-  'ツバキ':      { en:'Camellia',        keywords:['誇り','気取らない優美さ','理想の愛'],         desc:'冬から春に咲く艶やかな花。「誇り・気取らない優美さ」という花言葉を持ちます。赤は「気取らない美しさ」、白は「申し分のない魅力」を表します。' },
-  'サザンカ':    { en:'Sasanqua',        keywords:['ひたむきさ','困難に打ち勝つ','謙遜'],         desc:'冬に咲く日本原産の花。「ひたむきさ・困難に打ち勝つ」という前向きな花言葉を持ちます。' },
+  // ━━━ デイジー ━━━
+  'デイジー':      {en:'daisy',          e:'🌼', kw:['純潔','平和','希望','幸福'],                        d:'小さく可憐な白い花びらと黄色い中心が特徴。「純潔・平和・希望」などの花言葉を持つ春の花です。'},
+  'ヒナギク':      {en:'daisy',          e:'🌼', kw:['純潔','平和','希望'],                              d:'デイジーの和名。「純潔・平和・希望」という清らかな花言葉を持ちます。'},
 
-  // ── フウロソウ科 ──
-  'ゼラニウム':  { en:'Geranium',        keywords:['友情','信頼','真の友情','慰め'],              desc:'色鮮やかで育てやすい花。「友情・信頼・慰め」という温かな花言葉を持ちます。' },
+  // ━━━ タンポポ ━━━
+  'たんぽぽ':      {en:'dandelion',      e:'🌼', kw:['愛の神託','真心の愛','別離','幸福'],               d:'どこにでも咲く身近な花。「愛の神託」「真心の愛」というロマンティックな花言葉を持ちます。'},
+  'タンポポ':      {en:'dandelion',      e:'🌼', kw:['愛の神託','真心の愛','別離','幸福'],               d:'どこにでも咲く身近な花。「愛の神託」「真心の愛」という花言葉を持ちます。'},
+  '蒲公英':        {en:'dandelion',      e:'🌼', kw:['愛の神託','真心の愛'],                             d:'身近な黄色い花。「愛の神託」という花言葉を持ちます。'},
 
-  // ── ケシ科 ──
-  'ポピー':      { en:'Poppy',           keywords:['感謝','いたわり','恋の予感','陽気で優しい'],  desc:'鮮やかな花びらが印象的な花。赤は「感謝・いたわり」、オレンジは「陽気で優しい」、白は「忘却・眠り」を表します。' },
+  // ━━━ キク ━━━
+  'キク':          {en:'chrysanthemum',  e:'🌼', kw:['高貴','高潔','長寿','真実の愛'],                   d:'日本の国花のひとつ。「高貴・高潔・長寿」など格調高い意味を持ちます。白菊は「誠実」、黄菊は「長寿」を象徴します。'},
+  '菊':            {en:'chrysanthemum',  e:'🌼', kw:['高貴','高潔','長寿','真実の愛'],                   d:'日本の国花のひとつ。「高貴・高潔・長寿」など格調高い意味を持ちます。'},
+  '小菊':          {en:'small chrysanthemum',e:'🌼',kw:['高貴','真実','長寿'],                           d:'小さくて可愛らしい菊。「高貴・真実・長寿」という花言葉を持ちます。'},
 
-  // ── キンセンカ ──
-  'キンセンカ':  { en:'Calendula',       keywords:['悲嘆','失望','別れの悲しみ','慈愛'],          desc:'オレンジ・黄色の明るい色の花。「悲嘆・失望」という切ない花言葉がある一方、「慈愛・豊かさ」という温かい意味も持ちます。' },
+  // ━━━ ポピー ━━━
+  'ポピー':        {en:'poppy',          e:'🌸', kw:['感謝','いたわり','恋の予感','陽気で優しい'],        d:'鮮やかな花びらが印象的。赤は「感謝・いたわり」、オレンジは「陽気で優しい」、白は「忘却・眠り」を表します。'},
+  'アイスランドポピー':{en:'iceland poppy',e:'🌸',kw:['慰め','思いやり','忘却'],                         d:'北欧原産の丈夫なポピー。「慰め・思いやり」という優しい花言葉を持ちます。'},
 
-  // ── サクラソウ科 ──
-  'サクラソウ':  { en:'Primrose',        keywords:['初恋','永遠の愛','少年時代の希望'],            desc:'春に咲く淡いピンクの花。「初恋・永遠の愛・少年時代の希望」というロマンティックな花言葉を持ちます。' },
-  'シクラメン':  { en:'Cyclamen',        keywords:['遠慮','気後れ','嫉妬','内気'],               desc:'冬に咲く人気の鉢花。「遠慮・気後れ・内気」という控えめな花言葉を持ちます。別名「かがり火花」とも呼ばれます。' },
+  // ━━━ スイートピー ━━━
+  'スイートピー':  {en:'sweet pea',      e:'🌸', kw:['門出','優しい思い出','別離','ほのかな喜び'],        d:'蝶のような可愛い花。「門出・優しい思い出」という花言葉から、卒業や旅立ちのシーンでよく贈られます。'},
 
-  // ── キョウチクトウ科 ──
-  'ニチニチソウ':{ en:'Vinca',           keywords:['楽しい思い出','生涯の友情','友達づきあい'],   desc:'毎日新しい花を咲かせる花。「楽しい思い出・生涯の友情」という爽やかな花言葉を持ちます。' },
+  // ━━━ ボタン・シャクヤク ━━━
+  'ボタン':        {en:'peony',          e:'🌸', kw:['恥じらい','誠実','富貴','壮麗'],                   d:'大輪の花が豪華なボタン。「恥じらい・誠実・富貴・壮麗」という花言葉から「百花の王」とも呼ばれます。'},
+  '牡丹':          {en:'peony',          e:'🌸', kw:['恥じらい','誠実','富貴','壮麗'],                   d:'大輪の花が豪華な牡丹。「富貴・壮麗」という格調高い花言葉を持ちます。'},
+  'シャクヤク':    {en:'peony',          e:'🌸', kw:['恥じらい','内気','はにかみ','誠実'],               d:'大輪の花が美しい。「恥じらい・内気・はにかみ」という控えめな花言葉を持ちます。「立てば芍薬」の諺にも登場します。'},
+  '芍薬':          {en:'peony',          e:'🌸', kw:['恥じらい','内気','はにかみ'],                      d:'「立てば芍薬」と称される美しい花。「恥じらい・内気」という花言葉を持ちます。'},
 
-  // ── ユキノシタ科 ──
-  'サクソン':    { en:'Saxifrage',       keywords:['切実な愛情','深い感情'],                      desc:'岩場に咲く小さな花。「切実な愛情・深い感情」という花言葉を持ちます。' },
+  // ━━━ ツバキ・サザンカ ━━━
+  'ツバキ':        {en:'camellia',       e:'🌸', kw:['誇り','気取らない優美さ','理想の愛'],              d:'冬から春に咲く艶やかな花。「誇り・気取らない優美さ」という花言葉を持ちます。赤は「気取らない美しさ」、白は「申し分のない魅力」を表します。'},
+  '椿':            {en:'camellia',       e:'🌸', kw:['誇り','気取らない優美さ','理想の愛'],              d:'冬から春に咲く日本の花。「誇り・気取らない優美さ」という花言葉を持ちます。'},
+  'サザンカ':      {en:'sasanqua',       e:'🌸', kw:['ひたむきさ','困難に打ち勝つ','謙遜'],              d:'冬に咲く日本原産の花。「ひたむきさ・困難に打ち勝つ」という前向きな花言葉を持ちます。'},
+  '山茶花':        {en:'sasanqua',       e:'🌸', kw:['ひたむきさ','困難に打ち勝つ','謙遜'],              d:'冬の庭を彩る花。「ひたむきさ・困難に打ち勝つ」という強さの花言葉を持ちます。'},
 
-  // ── ユリ科（続き）──
-  'キキョウ':    { en:'Balloon Flower',  keywords:['永遠の愛','変わらぬ愛','誠実','清楚'],        desc:'青紫色の星形の花。「永遠の愛・誠実・清楚」という花言葉を持ちます。秋の七草のひとつで、日本の風景に馴染む花です。' },
-  'グラジオラス':{ en:'Gladiolus',       keywords:['用心','勝利','力強さ','真剣な愛'],            desc:'剣のような葉と花穂が特徴。「用心・勝利・力強さ」という花言葉があり、成功を祝う贈り物にも人気です。' },
+  // ━━━ ジャスミン系 ━━━
+  'ジャスミン':    {en:'jasmine',        e:'🤍', kw:['愛らしさ','優雅','官能的'],                        d:'甘く強い香りで知られる花。「愛らしさ・優雅・官能的」という魅惑的な花言葉を持ちます。'},
 
-  // ── アカバナ科 ──
-  'ヤグルマギク':{ en:'Cornflower',      keywords:['繊細','優雅','幸福感','純粋な心'],            desc:'鮮やかな青紫色の花。「繊細・優雅・純粋な心」という清楚な花言葉を持ちます。' },
+  // ━━━ キンモクセイ ━━━
+  'キンモクセイ':  {en:'osmanthus',      e:'🟠', kw:['謙虚','真実','気高い人'],                          d:'秋に甘い香りを放つ花。「謙虚・真実・気高い人」という品格ある花言葉を持ちます。'},
+  '金木犀':        {en:'osmanthus',      e:'🟠', kw:['謙虚','真実','気高い人'],                          d:'秋の甘い香りで知られる花。「謙虚・真実」という品格ある花言葉を持ちます。'},
 
-  // ── アブラナ科 ──
-  'ナノハナ':    { en:'Canola',          keywords:['快活','明るさ','小さな幸せ','豊かさ'],        desc:'春の菜の花は「快活・明るさ・小さな幸せ」を表します。黄色い絨毯のような光景は春の訪れを告げます。' },
+  // ━━━ ハス ━━━
+  'ハス':          {en:'lotus',          e:'🪷', kw:['清らかな心','神聖','離れゆく愛','雄弁'],           d:'泥の中から清らかな花を咲かせることから「清らかな心・神聖」の象徴。仏教でも悟りを象徴する花として重視されます。'},
+  '蓮':            {en:'lotus',          e:'🪷', kw:['清らかな心','神聖','離れゆく愛'],                  d:'泥の中から清らかな花を咲かせる蓮。「清らかな心・神聖」の象徴です。'},
 
-  // ── ミズキ科 ──
-  'ハナミズキ':  { en:'Dogwood',         keywords:['永続する愛','返礼','華やかな恋'],             desc:'春に咲く白やピンクの花。「永続する愛・返礼」という花言葉で、日米の友好を象徴する花としても知られます。' },
+  // ━━━ クチナシ ━━━
+  'クチナシ':      {en:'gardenia',       e:'🤍', kw:['私はとても幸せです','純潔','優雅'],                d:'純白で甘い香りの花。「私はとても幸せです・純潔・優雅」という花言葉を持ちます。'},
+  '梔子':          {en:'gardenia',       e:'🤍', kw:['私はとても幸せです','純潔','優雅'],                d:'純白で甘い香りが特徴のクチナシ。「私はとても幸せです」という幸福な花言葉を持ちます。'},
 
-  // ── オシロイバナ科 ──
-  'ブーゲンビリア':{ en:'Bougainvillea', keywords:['情熱','あなたは魅力にあふれている','熱心'],  desc:'鮮やかなマゼンタ・ピンクの苞が特徴。「情熱・あなたは魅力にあふれている」という華やかな花言葉を持ちます。' },
+  // ━━━ カスミソウ ━━━
+  'カスミソウ':    {en:'baby breath',    e:'🤍', kw:['幸福','清らかな心','無邪気','感謝'],               d:'小さな白い花が霞のように広がる花。「幸福・清らかな心・無邪気」という清楚な花言葉を持ちます。'},
 
-  // ── アヤメ科 ──
-  'フリーシア':  { en:'Freesia',         keywords:['親愛の情','無邪気','友情'],                   desc:'甘い香りが特徴の春の花。「親愛の情・無邪気・友情」という花言葉を持ちます。' },
-  'カキツバタ':  { en:'Rabbit-ear Iris', keywords:['幸運が来る','贈り物','優雅'],                 desc:'湿地に咲く美しい花。「幸運が来る・贈り物」という縁起のいい花言葉を持ちます。' },
+  // ━━━ ワスレナグサ ━━━
+  'ワスレナグサ':  {en:'forget-me-not',  e:'💙', kw:['私を忘れないで','真実の愛','友情'],               d:'小さな青い花。「私を忘れないで」という花言葉が有名で、変わらぬ愛・友情の象徴です。'},
+  '勿忘草':        {en:'forget-me-not',  e:'💙', kw:['私を忘れないで','真実の愛','友情'],               d:'「私を忘れないで」という花言葉が有名な青い小花です。'},
 
-  // ── パンジー ──
-  'パンジー':    { en:'Pansy',           keywords:['物思い','私を思って','思慮深い'],             desc:'三色の花びらが特徴。「物思い・私を思って」という花言葉はフランス語の「考える（penser）」に由来します。' },
+  // ━━━ ネモフィラ ━━━
+  'ネモフィラ':    {en:'nemophila',      e:'💙', kw:['可憐','どこでも成功','あなたを許す'],              d:'小さな青い花が一面に広がる春の花。「可憐・あなたを許す」という優しい花言葉を持ちます。'},
 
-  // ── ヒガンバナ科 ──
-  'ヒガンバナ':  { en:'Red Spider Lily', keywords:['また会う日を楽しみに','悲しい思い出','再会'],  desc:'秋のお彼岸に咲く真っ赤な花。「また会う日を楽しみに・悲しい思い出・再会」という切ない花言葉を持ちます。' },
+  // ━━━ アスター ━━━
+  'アスター':      {en:'aster',          e:'💜', kw:['追憶','愛の勝利','変化'],                          d:'秋を代表するキク科の花。「追憶・愛の勝利」という切なくもロマンティックな花言葉を持ちます。'},
+  'エゾギク':      {en:'china aster',    e:'💜', kw:['変化','追憶','信じる心'],                          d:'アスターの一種。「変化・追憶」という花言葉を持ちます。'},
 
-  // ── バラ科（続き）──
-  'ボタン':      { en:'Peony',           keywords:['恥じらい','誠実','富貴','壮麗'],              desc:'大輪の花が豪華なボタン。「恥じらい・誠実・富貴・壮麗」という花言葉から、「百花の王」とも呼ばれます。' },
-  'シャクヤク':  { en:'Peony',           keywords:['恥じらい','内気','はにかみ','誠実'],          desc:'ボタンに似た大輪の花。「恥じらい・内気・はにかみ」という控えめながら美しい花言葉を持ちます。「立てば芍薬」ということわざにも登場します。' },
+  // ━━━ リシアンサス（トルコキキョウ）━━━
+  'トルコキキョウ':{en:'lisianthus',     e:'💜', kw:['優雅','穏やか','希望','変わらぬ愛'],               d:'上品な花びらが特徴の人気花。「優雅・穏やか・希望」という花言葉から、ブライダルフラワーとして人気です。'},
+  'リシアンサス':  {en:'lisianthus',     e:'💜', kw:['優雅','穏やか','希望','変わらぬ愛'],               d:'美しい大輪の花。「優雅・穏やか・希望」という花言葉を持ちます。'},
 
-  // ── スミレ科 ──
-  'スミレ':      { en:'Violet',          keywords:['誠実','謙虚','小さな幸福','誠実な愛'],        desc:'小さく可憐な花。「誠実・謙虚・小さな幸福」という奥ゆかしい花言葉を持ちます。' },
+  // ━━━ スカビオサ ━━━
+  'スカビオサ':    {en:'scabiosa',       e:'💜', kw:['未亡人','不幸な愛','風情'],                        d:'淡い紫の花。「未亡人・不幸な愛」という少し切ない花言葉を持ちます。'},
+  'マツムシソウ':  {en:'scabiosa',       e:'💜', kw:['未亡人','不幸な愛','風情'],                        d:'秋の山野に咲く花。「風情」という風雅な花言葉も持ちます。'},
 
-  // ── ウコギ科 ──
-  'ヤツデ':      { en:'Fatsia',          keywords:['分別','親しみ'],                              desc:'大きな手のひらのような葉が特徴。「分別・親しみ」という落ち着いた花言葉を持ちます。' },
+  // ━━━ ストック ━━━
+  'ストック':      {en:'stock',          e:'🌸', kw:['愛情の絆','永遠の美','求愛'],                      d:'甘い香りが特徴の春の花。「愛情の絆・永遠の美・求愛」という花言葉を持ちます。'},
+  'アラセイトウ':  {en:'stock',          e:'🌸', kw:['愛情の絆','永遠の美','求愛'],                      d:'甘い芳香を放つ春の花。「愛情の絆・永遠の美」という花言葉を持ちます。'},
 
-  // ── モクセイ科 ──
-  'ジャスミン':  { en:'Jasmine',         keywords:['愛らしさ','優雅','官能的'],                   desc:'甘く強い香りで知られるジャスミン。「愛らしさ・優雅・官能的」という魅惑的な花言葉を持ちます。' },
-  'キンモクセイ':{ en:'Osmanthus',       keywords:['謙虚','真実','気高い人'],                     desc:'秋に甘い香りを放つ花。「謙虚・真実・気高い人」という品格のある花言葉を持ちます。' },
+  // ━━━ アルストロメリア ━━━
+  'アルストロメリア':{en:'alstroemeria', e:'🌸', kw:['未来への憧れ','持続','エキゾチック','友情'],        d:'南アメリカ原産の明るい花。「未来への憧れ・友情」という前向きな花言葉を持ちます。長持ちするため花束やアレンジメントに重宝されます。'},
+  '百合水仙':      {en:'alstroemeria',   e:'🌸', kw:['未来への憧れ','持続','友情'],                      d:'アルストロメリアの和名。「未来への憧れ・友情」という花言葉を持ちます。'},
 
-  // ── バラ科（バラ色ごと）──
-  '赤いバラ':    { en:'Red Rose',        keywords:['愛','情熱','あなたを愛しています'],            desc:'深い愛と情熱の象徴。プロポーズや記念日など愛を伝えるシーンで最も選ばれる花です。' },
-  'ピンクのバラ':{ en:'Pink Rose',       keywords:['感謝','しとやかさ','上品な愛'],               desc:'感謝と上品な愛を表します。母の日や誕生日のプレゼントに人気です。' },
-  '白いバラ':    { en:'White Rose',      keywords:['純潔','尊敬','深い敬意'],                     desc:'純潔と尊敬の象徴。結婚式のウエディングブーケとしても人気です。' },
-  '黄色いバラ':  { en:'Yellow Rose',     keywords:['友情','愛の告白','嫉妬'],                     desc:'友情と明るさを表します。ただし「嫉妬」という意味も含むため贈り方に注意が必要です。' },
+  // ━━━ オーニソガラム ━━━
+  'オーニソガラム':{en:'ornithogalum',   e:'🤍', kw:['純粋','才能','無邪気'],                           d:'白い星形の花が特徴。「純粋・才能・無邪気」という花言葉を持ちます。'},
 
-  // ── ユキノシタ ──
-  'ユキノシタ':  { en:'Saxifrage',       keywords:['深情け','愛嬌','好感'],                       desc:'白い小花が可愛らしい山野草。「深情け・愛嬌・好感」という親しみやすい花言葉を持ちます。' },
+  // ━━━ アイリス ━━━
+  'アイリス':      {en:'iris',           e:'💜', kw:['良い便り','優雅','信念','勇気'],                   d:'凛々しく美しい花。「良い便り・優雅・信念・勇気」という凛とした花言葉を持ちます。'},
+  'アヤメ':        {en:'iris',           e:'💜', kw:['良い便り','優雅','信念','伝言'],                   d:'凛とした姿が美しい花。「良い便り・優雅・信念」という花言葉を持ちます。'},
+  '菖蒲':          {en:'iris',           e:'💜', kw:['良い便り','優雅','信念'],                          d:'凛とした美しい花。「良い便り・優雅」という花言葉を持ちます。'},
+  'カキツバタ':    {en:'rabbit-ear iris',e:'💜', kw:['幸運が来る','贈り物','優雅'],                      d:'湿地に咲く美しい花。「幸運が来る・贈り物」という縁起のいい花言葉を持ちます。'},
 
-  // ── アスター ──
-  'アスター':    { en:'Aster',           keywords:['追憶','愛の勝利','変化'],                     desc:'秋を代表するキク科の花。「追憶・愛の勝利」という切なくもロマンティックな花言葉を持ちます。' },
+  // ━━━ クレマチス ━━━
+  'クレマチス':    {en:'clematis',       e:'💜', kw:['精神の美しさ','旅人の喜び','美しい心'],            d:'つる性の花。「精神の美しさ」という高尚な花言葉を持ちます。多彩な色と形で人気が高いです。'},
 
-  // ── ルピナス ──
-  'ルピナス':    { en:'Lupine',          keywords:['貪欲','想像力','いつも幸せ'],                 desc:'縦に連なる美しい花穂が特徴。「いつも幸せ・想像力」という花言葉を持ちます。' },
+  // ━━━ バーベナ ━━━
+  'バーベナ':      {en:'verbena',        e:'🌸', kw:['家族の和合','魔力','正直','心を合わせ団結'],       d:'小さな花が集まって咲く花。「家族の和合・心を合わせ団結」という花言葉を持ちます。'},
 
-  // ── ヘリオトロープ ──
-  'ヘリオトロープ':{ en:'Heliotrope',    keywords:['献身的な愛','永遠の愛','愛情'],               desc:'バニラのような甘い香りが特徴。「献身的な愛・永遠の愛」という深い花言葉を持ちます。' },
+  // ━━━ ペチュニア ━━━
+  'ペチュニア':    {en:'petunia',        e:'🌸', kw:['あなたと一緒にいると心が和む','変化に富む'],       d:'カラフルで花持ちのよい花。「あなたと一緒にいると心が和む」という温かな花言葉を持ちます。'},
 
-  // ── マツリカ ──
-  'マツリカ':    { en:'Arabian Jasmine', keywords:['あなたのみを想う','温かい心'],                desc:'白く可憐な花で、甘い香りが特徴。「あなたのみを想う」という一途な花言葉を持ちます。' },
+  // ━━━ ゼラニウム ━━━
+  'ゼラニウム':    {en:'geranium',       e:'🌸', kw:['友情','信頼','真の友情','慰め'],                   d:'色鮮やかで育てやすい花。「友情・信頼・慰め」という温かな花言葉を持ちます。'},
 
-  // ── ガーデニア ──
-  'クチナシ':    { en:'Gardenia',        keywords:['私はとても幸せです','純潔','優雅'],           desc:'純白で甘い香りの花。「私はとても幸せです・純潔・優雅」という花言葉を持ちます。' },
+  // ━━━ ルピナス ━━━
+  'ルピナス':      {en:'lupine',         e:'💜', kw:['貪欲','想像力','いつも幸せ'],                      d:'縦に連なる美しい花穂が特徴。「いつも幸せ・想像力」という花言葉を持ちます。'},
 
-  // ── カスミソウ ──
-  'カスミソウ':  { en:'Baby Breath',     keywords:['幸福','清らかな心','無邪気','感謝'],          desc:'小さな白い花が霞のように広がる花。「幸福・清らかな心・無邪気」という清楚な花言葉を持ちます。' },
+  // ━━━ ヤグルマギク ━━━
+  'ヤグルマギク':  {en:'cornflower',     e:'💙', kw:['繊細','優雅','幸福感','純粋な心'],                 d:'鮮やかな青紫色の花。「繊細・優雅・純粋な心」という清楚な花言葉を持ちます。'},
+  '矢車菊':        {en:'cornflower',     e:'💙', kw:['繊細','優雅','幸福感'],                            d:'鮮やかな青紫色の花。「繊細・優雅」という清楚な花言葉を持ちます。'},
 
-  // ── ポインセチア ──
-  'ポインセチア':{ en:'Poinsettia',      keywords:['聖なる夜','祝福する','幸運を祈る'],           desc:'クリスマスの定番植物。「聖なる夜・祝福する・幸運を祈る」というクリスマスにぴったりの花言葉を持ちます。' },
+  // ━━━ ハナミズキ ━━━
+  'ハナミズキ':    {en:'dogwood',        e:'🌸', kw:['永続する愛','返礼','華やかな恋'],                  d:'春に咲く白やピンクの花。「永続する愛・返礼」という花言葉で、日米友好の象徴としても知られます。'},
+  '花水木':        {en:'dogwood',        e:'🌸', kw:['永続する愛','返礼','華やかな恋'],                  d:'春に咲く美しい花。「永続する愛・返礼」という花言葉を持ちます。'},
 
-  // ── サルスベリ ──
-  'サルスベリ':  { en:'Crape Myrtle',    keywords:['雄弁','愛嬌','不用意'],                       desc:'夏から秋にかけて長く咲く花。「雄弁・愛嬌」という花言葉を持ちます。百日間咲くことから「百日紅」とも呼ばれます。' },
+  // ━━━ ライラック ━━━
+  'ライラック':    {en:'lilac',          e:'💜', kw:['初恋の感動','友情','謙虚','思い出'],               d:'甘い香りが特徴の春の花。「初恋の感動・友情・謙虚」という花言葉を持ちます。紫は「初恋」、白は「若い無邪気さ」を表します。'},
 
-  // ── ムクゲ ──
-  'ムクゲ':      { en:'Rose of Sharon',  keywords:['信念','尊敬','柔軟な心','デリケートな美'],   desc:'夏に咲くアオイ科の花。「信念・尊敬」という凛とした花言葉を持ちます。' },
+  // ━━━ モモ ━━━
+  'モモ':          {en:'peach blossom',  e:'🌸', kw:['気立てのよさ','チャーミング','私はあなたのとりこ'], d:'春に咲く淡いピンクの花。「気立てのよさ・チャーミング」という可愛らしい花言葉を持ちます。'},
+  '桃':            {en:'peach blossom',  e:'🌸', kw:['気立てのよさ','チャーミング','私はあなたのとりこ'], d:'春に咲く淡いピンクの花。「気立てのよさ・チャーミング」という花言葉を持ちます。'},
 
-  // ── オダマキ ──
-  'オダマキ':    { en:'Aquilegia',       keywords:['愚か','心配して','必ず勝つ'],                 desc:'独特の形をした花びらが特徴。「心配して・必ず勝つ」という花言葉を持ちます。' },
+  // ━━━ ウメ ━━━
+  'ウメ':          {en:'japanese plum',  e:'🌸', kw:['高潔','忍耐','忠実','上品'],                       d:'寒い冬を耐え春一番に咲く梅は「高潔・忍耐・忠実」の象徴。学問の神・菅原道真が愛した花としても知られます。'},
+  '梅':            {en:'japanese plum',  e:'🌸', kw:['高潔','忍耐','忠実','上品'],                       d:'寒い冬に咲く梅。「高潔・忍耐・忠実」の象徴とされます。'},
 
-  // ── ナデシコ ──
-  'ナデシコ':    { en:'Dianthus',        keywords:['大胆','純粋な愛','才能'],                     desc:'秋の七草のひとつ。「大胆・純粋な愛」という花言葉を持ちます。「撫でたくなるほど可愛い子」が名の由来とも言われます。' },
+  // ━━━ アサガオ ━━━
+  'アサガオ':      {en:'morning glory',  e:'🌸', kw:['愛情の絆','はかない恋','固い絆'],                  d:'夏の朝に咲く花。「愛情の絆・固い絆」という花言葉を持ち、つるが巻き付く様子から「縁・絆」の象徴とされます。'},
+  '朝顔':          {en:'morning glory',  e:'🌸', kw:['愛情の絆','はかない恋','固い絆'],                  d:'夏の朝に咲く日本の代表的な花。「愛情の絆・固い絆」という花言葉を持ちます。'},
 
-  // ── ショウブ ──
-  'アヤメ':      { en:'Iris',            keywords:['良い便り','優雅','信念','伝言'],              desc:'凛とした姿が美しい花。「良い便り・優雅・信念」という花言葉を持ちます。' },
+  // ━━━ ニチニチソウ ━━━
+  'ニチニチソウ':  {en:'vinca',          e:'🌸', kw:['楽しい思い出','生涯の友情','友達づきあい'],        d:'毎日新しい花を咲かせる花。「楽しい思い出・生涯の友情」という爽やかな花言葉を持ちます。'},
+
+  // ━━━ キキョウ ━━━
+  'キキョウ':      {en:'balloon flower',e:'💜', kw:['永遠の愛','変わらぬ愛','誠実','清楚'],             d:'青紫色の星形の花。「永遠の愛・誠実・清楚」という花言葉を持ちます。秋の七草のひとつです。'},
+  '桔梗':          {en:'balloon flower',e:'💜', kw:['永遠の愛','変わらぬ愛','誠実'],                    d:'秋の七草のひとつ。「永遠の愛・誠実」という花言葉を持ちます。'},
+
+  // ━━━ ヒガンバナ ━━━
+  'ヒガンバナ':    {en:'red spider lily',e:'🌺', kw:['また会う日を楽しみに','悲しい思い出','再会'],       d:'秋のお彼岸に咲く真っ赤な花。「また会う日を楽しみに・悲しい思い出・再会」という切ない花言葉を持ちます。'},
+  '彼岸花':        {en:'red spider lily',e:'🌺', kw:['また会う日を楽しみに','悲しい思い出','再会'],       d:'秋の彼岸に咲く赤い花。「再会・また会う日を楽しみに」という花言葉を持ちます。'},
+
+  // ━━━ ナノハナ ━━━
+  'ナノハナ':      {en:'canola',         e:'🌼', kw:['快活','明るさ','小さな幸せ','豊かさ'],             d:'春の菜の花は「快活・明るさ・小さな幸せ」を表します。黄色い絨毯のような光景は春の訪れを告げます。'},
+  '菜の花':        {en:'canola',         e:'🌼', kw:['快活','明るさ','小さな幸せ'],                      d:'春を告げる黄色い花。「快活・明るさ・小さな幸せ」という花言葉を持ちます。'},
+  '菜花':          {en:'canola',         e:'🌼', kw:['快活','明るさ','豊かさ'],                          d:'春の黄色い花。「快活・明るさ・豊かさ」という花言葉を持ちます。'},
+
+  // ━━━ フジ ━━━
+  'フジ':          {en:'wisteria',       e:'💜', kw:['歓迎','恋に迷う','決して離れない'],                d:'薄紫の房状の花が美しい植物。「歓迎・恋に迷う・決して離れない」というロマンティックな花言葉を持ちます。'},
+  '藤':            {en:'wisteria',       e:'💜', kw:['歓迎','恋に迷う','決して離れない'],                d:'薄紫の房状の花が美しい藤。「歓迎・決して離れない」という花言葉を持ちます。'},
+
+  // ━━━ シクラメン ━━━
+  'シクラメン':    {en:'cyclamen',       e:'🌸', kw:['遠慮','気後れ','嫉妬','内気'],                    d:'冬に咲く人気の鉢花。「遠慮・気後れ・内気」という控えめな花言葉を持ちます。別名「かがり火花」とも呼ばれます。'},
+
+  // ━━━ ポインセチア ━━━
+  'ポインセチア':  {en:'poinsettia',     e:'🌺', kw:['聖なる夜','祝福する','幸運を祈る'],               d:'クリスマスの定番植物。「聖なる夜・祝福する・幸運を祈る」というクリスマスにぴったりの花言葉を持ちます。'},
+
+  // ━━━ ブーゲンビリア ━━━
+  'ブーゲンビリア':{en:'bougainvillea',  e:'🌺', kw:['情熱','あなたは魅力にあふれている','熱心'],       d:'鮮やかなマゼンタ・ピンクの苞が特徴。「情熱・あなたは魅力にあふれている」という華やかな花言葉を持ちます。'},
+
+  // ━━━ ストレリチア ━━━
+  'ストレリチア':  {en:'bird of paradise',e:'🌺',kw:['寛大','気取った恋','輝かしい未来'],               d:'鮮やかなオレンジと青の花。「輝かしい未来・寛大」という前向きな花言葉から、誕生日や就職祝いに人気です。'},
+  'ゴクラクチョウカ':{en:'bird of paradise',e:'🌺',kw:['寛大','輝かしい未来'],                          d:'極楽鳥のような形が特徴の花。「輝かしい未来」という前向きな花言葉を持ちます。'},
+
+  // ━━━ ヘリコニア ━━━
+  'ヘリコニア':    {en:'heliconia',      e:'🌺', kw:['風変わり','独特の美','注目'],                     d:'トロピカルな赤とオレンジの花。「風変わり・独特の美」という個性的な花言葉を持ちます。'},
+
+  // ━━━ アンスリウム ━━━
+  'アンスリウム':  {en:'anthurium',      e:'🌺', kw:['煩悩','情熱','恋にもだえる心'],                   d:'光沢のあるハート形の苞が特徴。「煩悩・情熱・恋にもだえる心」という激しい花言葉を持ちます。'},
+
+  // ━━━ サルスベリ ━━━
+  'サルスベリ':    {en:'crape myrtle',   e:'🌸', kw:['雄弁','愛嬌','不用意'],                           d:'夏から秋にかけて長く咲く花。「雄弁・愛嬌」という花言葉を持ちます。百日間咲くことから「百日紅」とも呼ばれます。'},
+  '百日紅':        {en:'crape myrtle',   e:'🌸', kw:['雄弁','愛嬌'],                                    d:'夏から秋まで長期間咲く花。「雄弁・愛嬌」という花言葉を持ちます。'},
+
+  // ━━━ ムクゲ ━━━
+  'ムクゲ':        {en:'rose of sharon', e:'🌸', kw:['信念','尊敬','柔軟な心','デリケートな美'],         d:'夏に咲くアオイ科の花。「信念・尊敬」という凛とした花言葉を持ちます。'},
+  '木槿':          {en:'rose of sharon', e:'🌸', kw:['信念','尊敬','柔軟な心'],                          d:'夏に咲く白や紫の花。「信念・尊敬」という花言葉を持ちます。'},
+
+  // ━━━ ナデシコ ━━━
+  'ナデシコ':      {en:'dianthus',       e:'🌸', kw:['大胆','純粋な愛','才能','純愛'],                  d:'秋の七草のひとつ。「大胆・純粋な愛」という花言葉を持ちます。「撫でたくなるほど可愛い子」が名の由来とも言われます。'},
+  '撫子':          {en:'dianthus',       e:'🌸', kw:['大胆','純粋な愛','才能'],                          d:'秋の七草のひとつ。「大胆・純粋な愛」という花言葉を持つ日本の花です。'},
+
+  // ━━━ ヘリオトロープ ━━━
+  'ヘリオトロープ':{en:'heliotrope',     e:'💜', kw:['献身的な愛','永遠の愛','愛情'],                   d:'バニラのような甘い香りが特徴。「献身的な愛・永遠の愛」という深い花言葉を持ちます。'},
+
+  // ━━━ マトリカリア ━━━
+  'マトリカリア':  {en:'matricaria',     e:'🌼', kw:['集う喜び','楽しい','友情'],                        d:'白い小花が集まって咲く花。「集う喜び・楽しい・友情」という花言葉を持ちます。'},
+
+  // ━━━ カモミール ━━━
+  'カモミール':    {en:'chamomile',      e:'🌼', kw:['逆境に耐える','仲直り','愛らしさ'],               d:'アップルに似た甘い香りのハーブ花。「逆境に耐える・仲直り」という優しい花言葉を持ちます。'},
+
+  // ━━━ エリカ ━━━
+  'エリカ':        {en:'heather',        e:'🌸', kw:['孤独','博愛','謙虚な愛'],                          d:'細かい花が鈴なりに咲く花。「孤独・博愛・謙虚な愛」という花言葉を持ちます。'},
+
+  // ━━━ ユーカリ ━━━
+  'ユーカリ':      {en:'eucalyptus',     e:'🌿', kw:['思い出','記憶','再生'],                            d:'爽やかな香りと美しい葉を持つ植物。「思い出・記憶・再生」という花言葉を持ちます。フラワーアレンジメントにもよく使われます。'},
+
+  // ━━━ ドライフラワー系 ━━━
+  'スターチス':    {en:'statice',        e:'💜', kw:['変わらぬ心','途絶えぬ記憶','永遠に変わらない'],    d:'ドライフラワーにもなる花。「変わらぬ心・永遠に変わらない」という永続性を表す花言葉を持ちます。'},
+  'プロテア':      {en:'protea',         e:'🌺', kw:['王者の風格','変化','勇気'],                        d:'南アフリカ原産の大輪の花。「王者の風格・変化・勇気」という堂々とした花言葉を持ちます。'},
+
+  // ━━━ クローバー ━━━
+  'クローバー':    {en:'clover',         e:'🍀', kw:['約束','幸運','復讐','私のものになって'],            d:'4枚葉のクローバーは「幸運」の象徴として有名。白クローバーの花言葉は「約束・幸運」です。'},
+  'シロツメクサ':  {en:'white clover',   e:'🍀', kw:['約束','幸運','私を思って'],                        d:'「四つ葉のクローバー」で知られる花。「約束・幸運」という花言葉を持ちます。'},
+
+  // ━━━ オダマキ ━━━
+  'オダマキ':      {en:'aquilegia',      e:'💜', kw:['勝利','心配して','必ず勝つ'],                      d:'独特の形をした花びらが特徴。「心配して・必ず勝つ」という花言葉を持ちます。'},
+
+  // ━━━ デルフィニウム ━━━
+  'デルフィニウム':{en:'delphinium',     e:'💙', kw:['清明','あなたは幸福をふりまく','慈悲'],            d:'鮮やかな青い花穂が特徴。「清明・あなたは幸福をふりまく」という明るい花言葉を持ちます。'},
+
+  // ━━━ ラークスパー ━━━
+  'ラークスパー':  {en:'larkspur',       e:'💙', kw:['清明','軽快','陽気'],                              d:'デルフィニウムに似た青い花。「清明・軽快・陽気」という爽やかな花言葉を持ちます。'},
+
+  // ━━━ ヒマワリ（小） ━━━
+  'ミニひまわり':  {en:'mini sunflower', e:'🌻', kw:['憧れ','あなただけを見つめる'],                    d:'小ぶりで可愛らしいひまわり。「憧れ・あなただけを見つめる」という花言葉を持ちます。'},
+
+  // ━━━ サフラン ━━━
+  'サフラン':      {en:'saffron',        e:'💜', kw:['歓喜','陽気','節度ある楽しみ'],                   d:'世界で最も高価なスパイスにもなる花。「歓喜・陽気」という明るい花言葉を持ちます。'},
+
+  // ━━━ フロックス ━━━
+  'フロックス':    {en:'phlox',          e:'🌸', kw:['あなたの魂と合わせたい','温和','合意'],            d:'星形の小花が集まって咲く花。「あなたの魂と合わせたい・合意」という花言葉を持ちます。'},
+
+  // ━━━ ロベリア ━━━
+  'ロベリア':      {en:'lobelia',        e:'💙', kw:['謙虚','悪意','可憐'],                              d:'小さな青い花が鈴なりに咲く花。「謙虚・可憐」という花言葉を持ちます。'},
+
+  // ━━━ カリン ━━━
+  'ボケ':          {en:'flowering quince',e:'🌸',kw:['先駆者','早熟','妖精の輝き'],                      d:'春に咲く赤い花。「先駆者・早熟」という花言葉を持ちます。'},
+
+  // ━━━ ヘメロカリス ━━━
+  'ヘメロカリス':  {en:'daylily',        e:'🌼', kw:['愛の想い','媚び','日々の楽しさ'],                  d:'一日だけ咲くユリに似た花。「愛の想い・日々の楽しさ」という花言葉を持ちます。'},
+  'ニッコウキスゲ':{en:'daylily',        e:'🌼', kw:['愛の想い','媚び','日々の楽しさ'],                  d:'夏の山に咲く黄色い花。「愛の想い・日々の楽しさ」という花言葉を持ちます。'},
+
+  // ━━━ マリーゴールド ━━━
+  'マリーゴールド':{en:'marigold',       e:'🌼', kw:['悲しみ','嫉妬','予言','絶望'],                    d:'鮮やかなオレンジ・黄色の花。「悲しみ・嫉妬」という花言葉の一方、「勇者」という意味も持ちます。'},
+  'キンセンカ':    {en:'calendula',      e:'🌼', kw:['悲嘆','失望','別れの悲しみ','慈愛'],               d:'明るいオレンジ・黄色の花。「悲嘆・失望」という花言葉のほか、「慈愛・豊かさ」という温かい意味も持ちます。'},
+
+  // ━━━ オシロイバナ ━━━
+  'オシロイバナ':  {en:'four o\'clock',  e:'🌸', kw:['臆病','内気','恋を疑う'],                          d:'夕方に咲く花。「臆病・内気」という花言葉を持ちます。'},
+  '白粉花':        {en:'four o\'clock',  e:'🌸', kw:['臆病','内気','恋を疑う'],                          d:'夕方に開花するオシロイバナ。「臆病・内気」という花言葉を持ちます。'},
+
+  // ━━━ ウコン（ターメリック）━━━
+  'ウコン':        {en:'turmeric',       e:'🌼', kw:['乙女のしとやかさ','豊かさ'],                       d:'黄色い花と根茎のスパイスが有名。「乙女のしとやかさ」という花言葉を持ちます。'},
+
+  // ━━━ コブシ ━━━
+  'コブシ':        {en:'kobus magnolia', e:'🌸', kw:['友情','友愛','愛らしさ'],                          d:'春一番に咲く白い花。「友情・友愛・愛らしさ」という温かい花言葉を持ちます。'},
+  '辛夷':          {en:'kobus magnolia', e:'🌸', kw:['友情','友愛','愛らしさ'],                          d:'春に咲く白い木の花。「友情・友愛」という花言葉を持ちます。'},
+
+  // ━━━ モクレン ━━━
+  'モクレン':      {en:'magnolia',       e:'🌸', kw:['自然への愛','持続性','崇拝'],                      d:'春に咲く紫・白の大輪の花。「自然への愛・持続性」という深い花言葉を持ちます。'},
+  '木蓮':          {en:'magnolia',       e:'🌸', kw:['自然への愛','持続性','崇拝'],                      d:'春に咲く大輪の花。「自然への愛・崇拝」という花言葉を持ちます。'},
+  'ハクモクレン':  {en:'white magnolia', e:'🤍', kw:['自然への愛','持続性','清純'],                      d:'白い大輪の花が美しいモクレン。「自然への愛・清純」という花言葉を持ちます。'},
+
+  // ━━━ サクラソウ ━━━
+  'サクラソウ':    {en:'primrose',       e:'🌸', kw:['初恋','永遠の愛','少年時代の希望'],                d:'春に咲く淡いピンクの花。「初恋・永遠の愛・少年時代の希望」というロマンティックな花言葉を持ちます。'},
+  '桜草':          {en:'primrose',       e:'🌸', kw:['初恋','永遠の愛','少年時代の希望'],                d:'春に咲く可愛らしい花。「初恋・永遠の愛」という甘い花言葉を持ちます。'},
+
+  // ━━━ ゼニアオイ ━━━
+  'ゼニアオイ':    {en:'mallow',         e:'💜', kw:['恩恵','温和','柔和'],                              d:'薄紫の花びらが特徴の花。「恩恵・温和・柔和」という優しい花言葉を持ちます。'},
+
+  // ━━━ ホタルブクロ ━━━
+  'ホタルブクロ':  {en:'bellflower',     e:'💜', kw:['誠実','正義','感謝'],                              d:'ベル型の可愛い花。「誠実・正義・感謝」という真っ直ぐな花言葉を持ちます。'},
+
+  // ━━━ ニオイスミレ ━━━
+  'ニオイスミレ':  {en:'sweet violet',   e:'💜', kw:['誠実','謙虚','愛'],                               d:'香り高い小さな花。「誠実・謙虚」という控えめで清らかな花言葉を持ちます。'},
+
+  // ━━━ レンギョウ ━━━
+  'レンギョウ':    {en:'forsythia',      e:'🌼', kw:['集中力','希望','希望の実現'],                      d:'春に黄色い花を一斉に咲かせる花。「希望・集中力」という前向きな花言葉を持ちます。'},
+  '連翹':          {en:'forsythia',      e:'🌼', kw:['集中力','希望','希望の実現'],                      d:'春に黄色い花が咲く花。「希望・希望の実現」という花言葉を持ちます。'},
+
+  // ━━━ リュウキンカ ━━━
+  'キャットテール': {en:'cat tail',      e:'🌾', kw:['楽しい遊び','陽気','明るい'],                      d:'猫のしっぽのような穂が特徴。「楽しい遊び・陽気」という明るい花言葉を持ちます。'},
+
+  // ━━━ ビオラ ━━━
+  'ビオラ':        {en:'viola',          e:'💜', kw:['物思い','誠実','小さな幸福'],                      d:'パンジーに似た小ぶりの花。「物思い・誠実・小さな幸福」という花言葉を持ちます。'},
+
+  // ━━━ スノードロップ ━━━
+  'スノードロップ':{en:'snowdrop',       e:'🤍', kw:['希望','慰め','逆境の中の希望'],                   d:'雪の中から顔を出す小さな白い花。「希望・慰め・逆境の中の希望」という強い花言葉を持ちます。'},
+
+  // ━━━ ミモザ ━━━
+  'ミモザ':        {en:'mimosa',         e:'💛', kw:['感謝','友情','秘密の恋'],                          d:'ふわふわした黄色い花が可愛いミモザ。「感謝・友情・秘密の恋」という花言葉を持ちます。3月8日の国際女性デーのシンボルです。'},
+  'アカシア':      {en:'acacia',         e:'💛', kw:['友情','秘密の恋','真実の愛'],                      d:'黄色いポンポン状の花が可愛い。「友情・秘密の恋」という花言葉を持ちます。'},
+
+  // ━━━ カリフォルニアポピー ━━━
+  'カリフォルニアポピー':{en:'california poppy',e:'🌼',kw:['富','成功','愛の願い'],                    d:'鮮やかなオレンジ色の花。「富・成功・愛の願い」という前向きな花言葉を持ちます。'},
+
+  // ━━━ エキナセア ━━━
+  'エキナセア':    {en:'echinacea',      e:'💜', kw:['深い愛情','あなたの痛みを癒す','強い意志'],        d:'免疫力を高めるハーブとしても有名。「深い愛情・強い意志」という花言葉を持ちます。'},
+
+  // ━━━ ルドベキア ━━━
+  'ルドベキア':    {en:'rudbeckia',      e:'🌼', kw:['正義','公平','あなたを見つめる'],                  d:'夏から秋にかけて咲く黄色い花。「正義・公平・あなたを見つめる」という花言葉を持ちます。'},
+
+  // ━━━ コレオプシス ━━━
+  'コレオプシス':  {en:'coreopsis',      e:'🌼', kw:['いつも明るく','陽気','常に快活'],                  d:'鮮やかな黄色の花びらが特徴。「いつも明るく・陽気・常に快活」という前向きな花言葉を持ちます。'},
+  'キンケイギク':  {en:'coreopsis',      e:'🌼', kw:['いつも明るく','陽気'],                             d:'黄色いコスモスのような花。「いつも明るく・陽気」という花言葉を持ちます。'},
+
+  // ━━━ ユッカ ━━━
+  'ユッカ':        {en:'yucca',          e:'🤍', kw:['勇壮','偉大','立派'],                              d:'白い大輪の花が上に向かって咲く植物。「勇壮・偉大・立派」という力強い花言葉を持ちます。'},
+
+  // ━━━ サルビア ━━━
+  'サルビア':      {en:'salvia',         e:'🌺', kw:['知恵','尊敬','家族愛','よい家庭'],                 d:'鮮やかな赤い穂状の花が特徴。「知恵・尊敬・家族愛」という温かい花言葉を持ちます。'},
+  'セージ':        {en:'sage',           e:'🌿', kw:['知恵','尊敬','長生き','健康'],                    d:'ハーブとしても知られるセージ。「知恵・尊敬・健康」という花言葉を持ちます。'},
+
+  // ━━━ アガパンサス ━━━
+  'アガパンサス':  {en:'agapanthus',     e:'💙', kw:['ラブレター','誠実な愛','大好き'],                  d:'青紫の花が球状に咲く夏の花。「ラブレター・誠実な愛・大好き」というロマンティックな花言葉を持ちます。'},
+  '紫君子蘭':      {en:'agapanthus',     e:'💙', kw:['ラブレター','誠実な愛','大好き'],                  d:'青紫の美しい花。「ラブレター・誠実な愛・大好き」という花言葉を持ちます。'},
+
+  // ━━━ スカビオサ追加 ━━━
+  'ピンクッション':{en:'pincushion',     e:'🌸', kw:['不屈の愛','幸福','可憐'],                          d:'ピンクッション型の丸い花。「不屈の愛・幸福・可憐」という花言葉を持ちます。'},
+
+  // ━━━ オキザリス ━━━
+  'オキザリス':    {en:'oxalis',         e:'🌸', kw:['輝く心','あなたと共に','喜び'],                   d:'ハート型の葉と可愛い花が特徴。「輝く心・喜び」という花言葉を持ちます。'},
+
+  // ━━━ イペー ━━━
+  'ブラジルサクラ':{en:'ipe',            e:'🌸', kw:['勝利','輝かしい'],                                 d:'南アメリカ原産の鮮やかな花。「勝利・輝かしい」という花言葉を持ちます。'},
 };
 
-// =============================================
-//  🔍 花言葉DB検索関数
-// =============================================
-function lookupKotoba(name){
-  // 完全一致
-  if(FLOWER_DB[name]) return buildKotoba(name, FLOWER_DB[name]);
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  🔧 ユーティリティ
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  // 部分一致（入力が登録キーを含む、またはキーが入力を含む）
-  for(const [key, data] of Object.entries(FLOWER_DB)){
-    if(name.includes(key) || key.includes(name)){
-      return buildKotoba(key, data);
-    }
+// ひらがな⇔カタカナ変換
+function toKatakana(s){ return s.replace(/[\u3041-\u3096]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60)); }
+function toHiragana(s){ return s.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60)); }
+
+// 絵文字取得（DBから、なければデフォルト）
+function getEmoji(name){
+  const d = lookupDB(name);
+  if(d && d.e) return d.e;
+  return '🌸';
+}
+
+// Unsplash用英語クエリ
+function toEn(name){
+  const d = lookupDB(name);
+  if(d && d.en) return d.en + ' flower';
+  return name + ' flower';
+}
+
+// DBルックアップ（生データ）
+function lookupDB(name){
+  if(FLOWER_DB[name]) return FLOWER_DB[name];
+  const kata = toKatakana(name), hira = toHiragana(name);
+  for(const[k,v] of Object.entries(FLOWER_DB)){
+    if(name.includes(k)||k.includes(name)) return v;
+    if(toKatakana(k)===kata||toHiragana(k)===hira) return v;
   }
-
-  // ひらがな・カタカナ変換して再試行
-  const kata = toKatakana(name);
-  const hira = toHiragana(name);
-  for(const [key, data] of Object.entries(FLOWER_DB)){
-    const kKey = toKatakana(key);
-    if(kata===kKey || hira===toHiragana(key)){
-      return buildKotoba(key, data);
-    }
-  }
-
   return null;
 }
 
-function buildKotoba(key, data){
-  return {
-    nameJp: key,
-    nameEn: data.en || '',
-    keywords: data.keywords || [],
-    description: data.desc || '',
-    source: 'ローカルDB'
-  };
+// DB検索（返却形式を整形）
+function lookupKotoba(name){
+  const raw = lookupDB(name);
+  if(!raw) return null;
+  // キーを逆引き
+  let matchKey = name;
+  if(!FLOWER_DB[name]){
+    for(const k of Object.keys(FLOWER_DB)){
+      if(name.includes(k)||k.includes(name)||toKatakana(k)===toKatakana(name)){ matchKey=k; break; }
+    }
+  }
+  return { nameJp: matchKey, nameEn: raw.en||'', keywords: raw.kw||[], description: raw.d||'', source:'内蔵DB' };
 }
 
-// ひらがな→カタカナ
-function toKatakana(str){ return str.replace(/[\u3041-\u3096]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60)); }
-// カタカナ→ひらがな
-function toHiragana(str){ return str.replace(/[\u30A1-\u30F6]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60)); }
+async function scrapeKotoba(name){ return lookupKotoba(name); }
 
-// ─── DB検索（非同期ラッパー） ───
-async function scrapeKotoba(name){
-  return lookupKotoba(name);
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  🖼 Unsplash 画像取得（修正版）
+//  crossOriginを除去・URLにパラメータ不要
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+async function fetchImages(name){
+  if(!UNSPLASH_ACCESS_KEY || UNSPLASH_ACCESS_KEY==='YOUR_UNSPLASH_ACCESS_KEY_HERE') return [];
+  try{
+    const q = encodeURIComponent(toEn(name));
+    const url = `https://api.unsplash.com/search/photos?query=${q}&per_page=6&orientation=squarish&client_id=${UNSPLASH_ACCESS_KEY}`;
+    const r = await fetch(url);
+    if(!r.ok){
+      console.warn('Unsplash error:', r.status);
+      return [];
+    }
+    const j = await r.json();
+    if(!j.results || !j.results.length){ console.warn('Unsplash: no results'); return []; }
+    return j.results.map(item=>({
+      // small サイズを使用（CORSヘッダーが付いていて確実に表示できる）
+      url:   item.urls.small,
+      thumb: item.urls.thumb,
+      credit: item.user.name,
+      creditUrl: `${item.user.links.html}?utm_source=hanakotoba_app&utm_medium=referral`,
+      photoUrl:  `${item.links.html}?utm_source=hanakotoba_app&utm_medium=referral`,
+    }));
+  }catch(e){
+    console.warn('fetchImages error:', e);
+    return [];
+  }
 }
 
-// 絵文字マップ
-const EMOJI = {
-  '桜':'🌸','さくら':'🌸','ソメイヨシノ':'🌸','山桜':'🌸',
-  'バラ':'🌹','ばら':'🌹','薔薇':'🌹',
-  'チューリップ':'🌷','ユリ':'🌷','百合':'🌷',
-  'ひまわり':'🌻','向日葵':'🌻',
-  'たんぽぽ':'🌼','タンポポ':'🌼','マーガレット':'🌼','デイジー':'🌼',
-  'スミレ':'💜','菫':'💜','ラベンダー':'💜','パンジー':'💜',
-  'コスモス':'🌺','カーネーション':'🌺','ポピー':'🌺','キク':'🌺','菊':'🌺',
-  '蓮':'🪷','はす':'🪷','ハス':'🪷',
-  'あじさい':'💠','紫陽花':'💠','アジサイ':'💠','ネモフィラ':'💠',
-};
-
-// 日→英変換（Unsplash検索用）
-const EN = {
-  '桜':'cherry blossom','さくら':'cherry blossom','ソメイヨシノ':'cherry blossom',
-  'バラ':'rose','ばら':'rose','薔薇':'rose',
-  'チューリップ':'tulip','ひまわり':'sunflower','向日葵':'sunflower',
-  'たんぽぽ':'dandelion','タンポポ':'dandelion',
-  'スミレ':'violet','菫':'violet','コスモス':'cosmos flower',
-  '蓮':'lotus flower','はす':'lotus flower','ハス':'lotus flower',
-  'あじさい':'hydrangea','紫陽花':'hydrangea','アジサイ':'hydrangea',
-  'カーネーション':'carnation','ラベンダー':'lavender',
-  'ユリ':'lily','百合':'lily','マーガレット':'marguerite',
-  'デイジー':'daisy','パンジー':'pansy',
-  'キク':'chrysanthemum','菊':'chrysanthemum',
-  'ポピー':'poppy','クローバー':'clover',
-  'スズラン':'lily of the valley','ヒヤシンス':'hyacinth',
-  'フリージア':'freesia','ガーベラ':'gerbera',
-  'カスミソウ':'baby breath','ネモフィラ':'nemophila',
-  'ポインセチア':'poinsettia','サクラソウ':'primrose',
-};
-
-function emoji(name){ for(const[k,v] of Object.entries(EMOJI)){if(name.includes(k))return v;} return '🌸'; }
-function toEn(name){  for(const[k,v] of Object.entries(EN)){if(name.includes(k))return v;}  return name+' flower'; }
-
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  🎨 描画
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 let currentFlower='', currentImages=[];
 let favorites=[];
 try{ favorites=JSON.parse(localStorage.getItem('hkfavs')||'[]'); }catch(e){}
 
 window.addEventListener('load',()=>{
-  // setup-banner は常に非表示（APIキー設定済みのため）
-  document.getElementById('setup-banner').style.display='none';
   renderFavs();
   document.getElementById('search-input').addEventListener('keydown',e=>{ if(e.key==='Enter') doSearch(); });
 });
@@ -647,90 +728,65 @@ window.addEventListener('load',()=>{
 function quickSearch(name){ document.getElementById('search-input').value=name; doSearch(); }
 
 async function doSearch(){
-  const name=document.getElementById('search-input').value.trim();
+  const name = document.getElementById('search-input').value.trim();
   if(!name) return;
-  currentFlower=name;
+  currentFlower = name;
   setLoading(true); hideResult(); hideError();
-
   try{
-    const [kRes,iRes]=await Promise.allSettled([scrapeKotoba(name), fetchImages(name)]);
+    const [kRes, iRes] = await Promise.allSettled([scrapeKotoba(name), fetchImages(name)]);
     const kData = kRes.status==='fulfilled' ? kRes.value : null;
     const imgs  = iRes.status==='fulfilled' ? iRes.value : [];
-
     if(!kData || !kData.keywords.length){
       showError('この花はデータベースに登録されていません 🌿<br>別の花の名前や、カタカナ・ひらがなを試してみてください。');
       return;
     }
-    currentImages=imgs;
+    currentImages = imgs;
     renderResult(name, kData, imgs);
   }catch(e){
-    showError('エラーが発生しました：'+e.message);
+    showError('エラーが発生しました：' + e.message);
   }finally{
     setLoading(false);
   }
 }
 
-
-
-// ─── Unsplash 画像 ───
-async function fetchImages(name){
-  if(UNSPLASH_ACCESS_KEY==='YOUR_UNSPLASH_ACCESS_KEY_HERE') return [];
-  try{
-    const q=encodeURIComponent(toEn(name));
-    const url=`https://api.unsplash.com/search/photos?query=${q}&per_page=5&orientation=squarish&client_id=${UNSPLASH_ACCESS_KEY}`;
-    const r=await fetch(url);
-    if(!r.ok){ console.warn('Unsplash API error:', r.status, await r.text()); return []; }
-    const j=await r.json();
-    if(!j.results || j.results.length===0){ console.warn('Unsplash: no results for', q); return []; }
-    return j.results.map(item=>({
-      url:   item.urls.small,      // small は確実に表示できる（regular はCORSで弾かれる場合あり）
-      full:  item.urls.regular,
-      thumb: item.urls.thumb,
-      credit: item.user.name,
-      credit_link: item.user.links.html+'?utm_source=hanakotoba_app&utm_medium=referral',
-      photo_link:  item.links.html+'?utm_source=hanakotoba_app&utm_medium=referral',
-    }));
-  }catch(e){
-    console.warn('fetchImages failed:', e);
-    return [];
-  }
-}
-
-// ─── 描画 ───
 function renderResult(name, kData, images){
-  document.getElementById('flower-name-jp').textContent=kData.nameJp||name;
+  document.getElementById('flower-name-jp').textContent = kData.nameJp || name;
   document.getElementById('flower-name-en').textContent = kData.nameEn ? `( ${kData.nameEn} )` : '';
-  document.getElementById('source-text').textContent='出典：内蔵花言葉データベース';
+  document.getElementById('source-text').textContent = '出典：内蔵花言葉データベース（200種）';
 
-  // 絵文字リセット
-  document.getElementById('img-emoji').textContent=emoji(name);
-  document.getElementById('img-emoji').style.display='block';
-  document.getElementById('main-img').style.display='none';
-  document.getElementById('photo-credit').innerHTML='';
+  // 絵文字を初期表示
+  document.getElementById('img-emoji').textContent = getEmoji(name);
+  document.getElementById('img-emoji').style.display = 'block';
+  document.getElementById('main-img').style.display = 'none';
+  document.getElementById('photo-credit').innerHTML = '';
 
   // バッジ
-  const bl=document.getElementById('kotoba-badges');
-  bl.innerHTML='';
+  const bl = document.getElementById('kotoba-badges');
+  bl.innerHTML = '';
   kData.keywords.forEach((kw,i)=>{
-    const b=document.createElement('span');
+    const b = document.createElement('span');
     b.className='kotoba-badge'; b.textContent=kw;
-    b.style.animationDelay=(i*.08)+'s';
+    b.style.animationDelay = (i*.08)+'s';
     bl.appendChild(b);
   });
+  document.getElementById('desc-box').textContent = kData.description;
 
-  document.getElementById('desc-box').textContent=kData.description;
-
-  // サムネイル
-  const tr=document.getElementById('thumb-row'); tr.innerHTML='';
+  // サムネイル＆メイン画像
+  const tr = document.getElementById('thumb-row');
+  tr.innerHTML = '';
   if(images.length){
-    setMain(images[0]);
+    setMainImage(images[0]);
     images.forEach((img,i)=>{
-      const d=document.createElement('div');
-      d.className='thumb'+(i===0?' active':'');
-      d.onclick=()=>selectThumb(i);
-      const im=new Image(); im.src=img.thumb; im.alt='';
-      im.onerror=()=>{d.style.display='none';};
-      d.appendChild(im); tr.appendChild(d);
+      const d = document.createElement('div');
+      d.className = 'thumb' + (i===0?' active':'');
+      d.onclick = ()=>selectThumb(i);
+      const im = new Image();
+      // サムネイルは crossOrigin なしで読み込む
+      im.src = img.thumb;
+      im.alt = '';
+      im.onerror = ()=>{ d.style.display='none'; };
+      d.appendChild(im);
+      tr.appendChild(d);
     });
   }
 
@@ -739,59 +795,64 @@ function renderResult(name, kData, images){
   document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function setMain(img){
-  const el=document.getElementById('main-img');
-  const em=document.getElementById('img-emoji');
-  const cr=document.getElementById('photo-credit');
+function setMainImage(img){
+  const el  = document.getElementById('main-img');
+  const em  = document.getElementById('img-emoji');
+  const cr  = document.getElementById('photo-credit');
 
-  // まず絵文字を表示しておく（ロード完了まで見せる）
-  em.style.display='block';
-  el.style.display='none';
+  // 絵文字を先に見せる
+  em.style.display = 'block';
+  el.style.display = 'none';
 
-  // イベントを先に登録してから src をセット（順序が重要）
-  el.onload = ()=>{
-    el.style.display='block';
-    em.style.display='none';
+  // ★ crossOrigin は設定しない（設定するとCORSエラーになる）
+  // ★ URLにパラメータを追加しない（Unsplashの署名付きURLを壊さない）
+  const newImg = new Image();
+  newImg.onload = ()=>{
+    el.src = newImg.src;
+    el.style.display = 'block';
+    em.style.display  = 'none';
   };
-  el.onerror = ()=>{
-    el.style.display='none';
-    em.style.display='block';
-    cr.innerHTML='';
-    console.warn('Image load failed:', img.url);
+  newImg.onerror = ()=>{
+    // 画像読み込み失敗 → 絵文字のまま表示
+    el.style.display = 'none';
+    em.style.display = 'block';
+    cr.innerHTML = '';
+    console.warn('Image failed:', img.url);
   };
-  el.crossOrigin='anonymous';
-  el.src = img.url + '&auto=format'; // Unsplash CDN パラメータで確実に取得
+  newImg.src = img.url;
 
-  // Unsplash利用規約：クレジット表示必須
-  cr.innerHTML=`📷 <a href="${img.credit_link}" target="_blank">${img.credit}</a> on <a href="${img.photo_link}" target="_blank">Unsplash</a>`;
+  // Unsplash利用規約：クレジット必須
+  cr.innerHTML = `📷 <a href="${img.creditUrl}" target="_blank" rel="noopener">${img.credit}</a> on <a href="${img.photoUrl}" target="_blank" rel="noopener">Unsplash</a>`;
 }
 
 function selectThumb(i){
   document.querySelectorAll('.thumb').forEach((t,j)=>t.classList.toggle('active',i===j));
-  setMain(currentImages[i]);
+  setMainImage(currentImages[i]);
 }
 
-// ─── お気に入り ───
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  ♡ お気に入り
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function toggleFav(){
-  const i=favorites.indexOf(currentFlower);
+  const i = favorites.indexOf(currentFlower);
   if(i===-1) favorites.push(currentFlower); else favorites.splice(i,1);
-  try{localStorage.setItem('hkfavs',JSON.stringify(favorites));}catch(e){}
+  try{ localStorage.setItem('hkfavs',JSON.stringify(favorites)); }catch(e){}
   updateFavBtn(); renderFavs();
 }
 function updateFavBtn(){
-  const on=favorites.includes(currentFlower);
-  document.getElementById('fav-icon').textContent=on?'♥':'♡';
-  document.getElementById('fav-label').textContent=on?'お気に入り済み！':'お気に入りに追加';
+  const on = favorites.includes(currentFlower);
+  document.getElementById('fav-icon').textContent  = on?'♥':'♡';
+  document.getElementById('fav-label').textContent = on?'お気に入り済み！':'お気に入りに追加';
 }
 function renderFavs(){
-  const sec=document.getElementById('fav-section');
-  const lst=document.getElementById('fav-list');
-  if(!favorites.length){sec.style.display='none';return;}
+  const sec = document.getElementById('fav-section');
+  const lst = document.getElementById('fav-list');
+  if(!favorites.length){ sec.style.display='none'; return; }
   sec.style.display='block'; lst.innerHTML='';
   favorites.forEach(name=>{
     const item=document.createElement('div'); item.className='fav-item';
     const lbl=document.createElement('span');
-    lbl.textContent=emoji(name)+' '+name; lbl.onclick=()=>quickSearch(name);
+    lbl.textContent = getEmoji(name)+' '+name; lbl.onclick=()=>quickSearch(name);
     const rm=document.createElement('span'); rm.className='fav-remove'; rm.textContent='✕';
     rm.onclick=()=>removeFav(name);
     item.append(lbl,rm); lst.appendChild(item);
@@ -799,17 +860,19 @@ function renderFavs(){
 }
 function removeFav(name){
   favorites=favorites.filter(f=>f!==name);
-  try{localStorage.setItem('hkfavs',JSON.stringify(favorites));}catch(e){}
+  try{ localStorage.setItem('hkfavs',JSON.stringify(favorites)); }catch(e){}
   renderFavs(); if(currentFlower===name) updateFavBtn();
 }
 
-// ─── その他 ───
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  その他
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function shareResult(){
   const text=`🌸 ${currentFlower}の花言葉を調べました！`;
   if(navigator.share) navigator.share({title:'花言葉しらべ',text});
   else{
-    try{navigator.clipboard.writeText(text+'\n'+location.href);alert('クリップボードにコピーしました！');}
-    catch(e){alert('共有できませんでした。');}
+    try{ navigator.clipboard.writeText(text+'\n'+location.href); alert('クリップボードにコピーしました！'); }
+    catch(e){ alert('共有できませんでした。'); }
   }
 }
 function clearResult(){ hideResult(); document.getElementById('search-input').value=''; document.getElementById('search-input').focus(); currentFlower=''; }
